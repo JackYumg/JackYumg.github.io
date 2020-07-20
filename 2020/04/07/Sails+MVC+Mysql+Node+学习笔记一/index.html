@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Sails+MVC+Mysql+Node+学习笔记一 | JackYumg的学习空间</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="##项目构建安装Node就不多说了，###1.sails安装与项目新建运行 12345678npm install sails -g&#x2F;&#x2F;全局安装sails new project-name&#x2F;&#x2F;新建项目cd project-name &#x2F;&#x2F;进入刚才新建项目的目录sails lift &#x2F;&#x2F;运行项目，运行原理也是直接在项目目录">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Sails+MVC+Mysql+Node+学习笔记一">
+<meta property="og:url" content="https://jackyumg.github.io/2020/04/07/Sails+MVC+Mysql+Node+%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%80/index.html">
+<meta property="og:site_name" content="JackYumg的学习空间">
+<meta property="og:description" content="##项目构建安装Node就不多说了，###1.sails安装与项目新建运行 12345678npm install sails -g&#x2F;&#x2F;全局安装sails new project-name&#x2F;&#x2F;新建项目cd project-name &#x2F;&#x2F;进入刚才新建项目的目录sails lift &#x2F;&#x2F;运行项目，运行原理也是直接在项目目录">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://sailsjs.com/images/hero_squid.png">
+<meta property="og:image" content="http://img.blog.csdn.net/20170827195403601?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcGVyc29uRmVhdA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://i.imgur.com/7D14XIQ.png">
+<meta property="og:image" content="http://i.imgur.com/1h92KQK.png">
+<meta property="article:published_time" content="2020-04-07T06:11:35.172Z">
+<meta property="article:modified_time" content="2020-04-07T06:11:35.172Z">
+<meta property="article:author" content="JackYumg">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://sailsjs.com/images/hero_squid.png">
+  
+    <link rel="alternate" href="/atom.xml" title="JackYumg的学习空间" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">JackYumg的学习空间</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">主页</a>
+        
+          <a class="main-nav-link" href="/archives">文章列表</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://jackyumg.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Sails+MVC+Mysql+Node+学习笔记一" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/04/07/Sails+MVC+Mysql+Node+%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%80/" class="article-date">
+  <time datetime="2020-04-07T06:11:35.172Z" itemprop="datePublished">2020-04-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Sails+MVC+Mysql+Node+学习笔记一
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="http://sailsjs.com/images/hero_squid.png" alt="这里写图片描述"><br>##项目构建<br>安装Node就不多说了，<br>###1.sails安装与项目新建运行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">npm install sails -g&#x2F;&#x2F;全局安装</span><br><span class="line"></span><br><span class="line">sails new project-name&#x2F;&#x2F;新建项目</span><br><span class="line"></span><br><span class="line">cd project-name &#x2F;&#x2F;进入刚才新建项目的目录</span><br><span class="line"></span><br><span class="line">sails lift &#x2F;&#x2F;运行项目，运行原理也是直接在项目目录路径下使用node app.js</span><br><span class="line">npm install sails-mysql --save &#x2F;&#x2F;--save 把安装的模块写进package.json</span><br></pre></td></tr></table></figure>
+<p>到了这一步，环境算是搭建完成。<br>###2.目录结构介绍</p>
+<p><img src="http://img.blog.csdn.net/20170827195403601?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcGVyc29uRmVhdA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>####2.1api<br>在api目录下，有着controller、hooks、models、policies、responses和services几个目录</p>
+<ol>
+<li>controller目录下存放的就是页面与后台服务器通讯的接口，如果对应的java，那么就是java里面的Action层或者使用Spring<br>MVC ，那么也是对应的Controller，里面存放的就是接口。</li>
+<li>models,数据模型层，也就是实体层，对应java里面的entity。</li>
+<li>policies(策略),在controller之前执行，主要工作是session认证，如果session是认证通过了，那么就可以进入下一个策略或者如果是最后一个策略，那么就可以进入controller了，个人感觉像是java里的过滤器或者分发器。</li>
+<li>responses,自定义的响应。举个例子，一般从前台发出一个请求后，如果经过了服务器，那么都会给客户端返回一个结果，除了本身自带的响应方式，也可以采用自定义的响应，比如返回一个404页面，返回500页面或者返回字符串等等。</li>
+<li>services,业务逻辑处理层，采用es6的Module的语法编写。<br>####2.2assets静态资源层<br>在这层目录里面有，js，image，styles,templates，这个目录里面主要放的就是静态资源，没什么说的。<br>####2.3config配置层<br>这层里面有env和locales两层，然后和一些js。</li>
+</ol>
+<p>env中有一个development.js里面的注释是如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">开发环境配置，这个文件夹里面包含了开发团队共享的一些配置，比如api的名称，数据库的密码，如果你在你的Sails应用中使用了版本控制器，这个文件也会提交到你的资源仓库里面，除非你在gitignore中添加了一个信息，表明这个文件是私有的或不公开的。</span><br></pre></td></tr></table></figure>
+
+<p>env中的production.js里的注释如下：<br>项目环境配置，与development类似，但是从注释中看到要多一些东西，比如配置端口的和日志的</p>
+<p>####2.4task任务层<br>这层里面主要放置的是grunt的任务，<br>####2.5views层<br>这一层主要放置的是作为展示的前台页面，一种情况是使用node做单纯的后台服务器，不处理前台业务，而另外一种情况是采用模块化的思想，对结构进行分层，达到MVC的合理实现，本来Sails就是一个MVC框架所以第一种情况还是不太会出现。<br>###3开始搭建项目<br>整体流程：新建数据库 -&gt; 新建表 -&gt; 建实体 -&gt; 在sails中搭建环境 -&gt; 编码 -&gt; 得到结果<br>####3.1新建数据库和表<br>建好mysql数据库，然后新建表，新建表有两种新建方式，一种是自动建表，另外一种是手动建表。手动建表我就不多说了。<br>####3.2链接数据库<br>设计的主要文件是config里面的connections.js，里面存放的是链接数据库的配置，这里的配置不光只能配置这么一个链接，可以多个不同或相同数据库，代码如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mySqlServer: &#123;</span><br><span class="line">      adapter: &#39;sails-mysql&#39;,</span><br><span class="line">      host: &#39;localhost&#39;,</span><br><span class="line">      port: 3306,</span><br><span class="line">      user: &#39;root&#39;,</span><br><span class="line">      password: &#39;root&#39;,</span><br><span class="line">      database: &#39;myproject&#39;,</span><br><span class="line">      charset:&#39;utf8&#39;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>然后下一个重要文件就是models.js里面的文件，里面存放的是数据库使用的那个链接，以上面的名字作为键值，代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">connection: &#39;mySqlServer&#39;,</span><br><span class="line">  migrate: &#39;alter&#39;</span><br></pre></td></tr></table></figure>
+<p>connection ：表示我是用的就是mySqlServer这个链接<br>migrate：alter修改，这意味这对这个数据在运行项目时时会根据你实体的设计修改数据中的表结构的。而safe就是要手动建表，那么这个时候你得把实体与数据库对应起来之不过有点麻烦，对于初学者来说还是把实体与数据库手动对应起来吗，因为之后还会有复杂的表间关系，比如说一对一、一对多、多对多等。<br>####3.3建立数据模型<br>回到api层理的models里面，在里面新建好js文件,值得注意的是文件名称，这个名称直接关系到你之后的查询，删除等操作，我新建的operator的代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">module.exports &#x3D; &#123;</span><br><span class="line">  attributes:&#123;</span><br><span class="line">    username:&#123;</span><br><span class="line">      type:&#39;string&#39;,</span><br><span class="line">      required:true</span><br><span class="line">    &#125;,</span><br><span class="line">    password:&#123;</span><br><span class="line">      type:&#39;string&#39;,</span><br><span class="line">      required:true</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>除了这两个字段，sails会自动给你在表里面新建三个字段，id,createdAt,updatedAt,新建好数据的表结构如下图所示：<br><img src="http://i.imgur.com/7D14XIQ.png" alt="这里写图片描述"><br>####3.4测试数据链接<br>执行代码在项目路径下进入CMD命令窗口<br>node app.js或者sails lift，执行完之后如果没有报错且新建好数据库那么就没什么问题了。<br>那么在这个阶段容易碰到的问题有那些呢：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Consistency violation: A model (&#96;operator&#96;) references a datastore which cannot be found (&#96;otherSql&#96;).</span><br></pre></td></tr></table></figure>
+
+<p>这句话的意思是，operator这个数据模型在otherSql这个链接中找不到。所以遇到这个情况就检查是不是链接配的有问题或者Mysql的服务已关闭。<br>#####3.5controller的配置<br>controller配置里面的是交互的接口,代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">module.exports &#x3D; &#123;</span><br><span class="line">  findOne:function (req,res) &#123;</span><br><span class="line">    var id &#x3D; req.param(&#39;id&#39;);</span><br><span class="line">    if(id)&#123;</span><br><span class="line">      console.log(id);</span><br><span class="line">      operator.find(id, function operatorFound(err, entity) &#123;</span><br><span class="line">        res.send(entity,200);</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">      console.log(&quot;是啊比&quot;);</span><br><span class="line">      res.send(&quot;失败&quot;,500);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>一个简单的查询就这么完成了，写完成之后就是验证编写的正确性了。在浏览器输入url:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;localhost:1337&#x2F;user&#x2F;findOne?id&#x3D;1</span><br></pre></td></tr></table></figure>
+
+<p>查出来的结果如图所示：<br><img src="http://i.imgur.com/1h92KQK.png" alt=""><br>这条数据手动添加的，这样一个很简单的demo算完成了。</p>
+<p>###4补充</p>
+<p>如果想要修改项目访问端口，可在local.js里面添加：port:端口号，项目访问默认路径是user，想要修改的话，可以在route里面修改进行访问。<br>代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#39;&#x2F;findOne&#39;:&#123;</span><br><span class="line">    controller:&#39;UserController&#39;,</span><br><span class="line">    action:&#39;findOne&#39;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>起哄controller对应的就是controller的文件名（不添加后缀）,action:对应的就是里面的方法名。</p>
+<p><a href="http://sailsjs.com/" target="_blank" rel="noopener">sails官网</a></p>
+<p><a href="https://gruntjs.com/" target="_blank" rel="noopener">grunt官网</a></p>
+<p><a href="http://es6.ruanyifeng.com/#docs/module" target="_blank" rel="noopener">es6-阮一峰-模块</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://jackyumg.github.io/2020/04/07/Sails+MVC+Mysql+Node+%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%80/" data-id="ckcuez2lg0001q4vm15cz5r2g" class="article-share-link">分享</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/04/07/gitFlow%E5%B7%A5%E4%BD%9C%E6%B5%81-%E7%BF%BB%E8%AF%91/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          gitFlow工作流-翻译
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/04/07/angularV4+%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">angularV4+学习笔记</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/04/16/rxjs%E6%93%8D%E4%BD%9C%E7%AC%A6%E8%AF%B4%E6%98%8E/">rxjs操作符说明</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/15/css%E5%8A%A8%E7%94%BB/">css动画</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/07/%E9%9B%86%E5%90%88%E4%B8%8E%E5%AD%97%E5%85%B8/">集合与字典</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/07/%E7%94%A8JPlag%E5%9C%A8%E4%B8%80%E7%BB%84%E7%A8%8B%E5%BA%8F%E4%B8%AD%E5%AF%BB%E6%89%BE%E6%8A%84%E8%A2%AD%E8%A1%8C%E4%B8%BA%EF%BC%88%E7%BF%BB%E8%AF%91%EF%BC%89/">用JPlag在一组程序中寻找抄袭行为（翻译）</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/07/%E6%AF%8F%E5%A4%A9%E5%9D%9A%E6%8C%81%E4%B8%80%E4%B8%AACSS-%E6%BB%9A%E5%8A%A8%E6%96%87%E5%AD%97/">每天坚持一个CSS-滚动文字</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 JackYumg<br>
+      授权 <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

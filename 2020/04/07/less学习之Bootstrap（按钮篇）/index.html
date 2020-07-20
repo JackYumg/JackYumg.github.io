@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>less学习之Bootstrap（按钮篇） | JackYumg的学习空间</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="less学习之Bootstrap按钮篇）如我上一篇less学习之Bootstrap里面，介绍了Bootstrap的目录结构，说明了在variables.less这个文件里面，定义了主题色，也包括了按钮的主题色。接下来看一看 buttons.less与 mixins&#x2F;buttons.less. 文件 buttons.less 与 mixins&#x2F;buttons.less内容不是很多，总结下来就是： 1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="less学习之Bootstrap（按钮篇）">
+<meta property="og:url" content="https://jackyumg.github.io/2020/04/07/less%E5%AD%A6%E4%B9%A0%E4%B9%8BBootstrap%EF%BC%88%E6%8C%89%E9%92%AE%E7%AF%87%EF%BC%89/index.html">
+<meta property="og:site_name" content="JackYumg的学习空间">
+<meta property="og:description" content="less学习之Bootstrap按钮篇）如我上一篇less学习之Bootstrap里面，介绍了Bootstrap的目录结构，说明了在variables.less这个文件里面，定义了主题色，也包括了按钮的主题色。接下来看一看 buttons.less与 mixins&#x2F;buttons.less. 文件 buttons.less 与 mixins&#x2F;buttons.less内容不是很多，总结下来就是： 1">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-04-07T06:11:35.174Z">
+<meta property="article:modified_time" content="2020-04-07T06:11:35.175Z">
+<meta property="article:author" content="JackYumg">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="JackYumg的学习空间" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">JackYumg的学习空间</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">主页</a>
+        
+          <a class="main-nav-link" href="/archives">文章列表</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://jackyumg.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-less学习之Bootstrap（按钮篇）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/04/07/less%E5%AD%A6%E4%B9%A0%E4%B9%8BBootstrap%EF%BC%88%E6%8C%89%E9%92%AE%E7%AF%87%EF%BC%89/" class="article-date">
+  <time datetime="2020-04-07T06:11:35.174Z" itemprop="datePublished">2020-04-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      less学习之Bootstrap（按钮篇）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="less学习之Bootstrap按钮篇）"><a href="#less学习之Bootstrap按钮篇）" class="headerlink" title="less学习之Bootstrap按钮篇）"></a>less学习之<code>Bootstrap</code>按钮篇）</h1><p>如我上一篇<a href="https://segmentfault.com/a/1190000017904706" target="_blank" rel="noopener">less学习之Bootstrap</a>里面，介绍了Bootstrap的目录结构，说明了在<code>variables.less</code>这个文件里面，定义了主题色，也包括了按钮的主题色。接下来看一看 <code>buttons.less</code>与 <code>mixins/buttons.less</code>.</p>
+<h2 id="文件-buttons-less-与-mixins-buttons-less"><a href="#文件-buttons-less-与-mixins-buttons-less" class="headerlink" title="文件 buttons.less 与 mixins/buttons.less"></a>文件 <code>buttons.less</code> 与 <code>mixins/buttons.less</code></h2><p>内容不是很多，总结下来就是：</p>
+<p>1、“<code>.btn</code>”的基础样式定义。</p>
+<p>2、按钮的各种状态含义的样式定义，例如：btn-primary、btn-success等。</p>
+<p>3、伪连接，按钮的样式显示为连接的样式。</p>
+<p>4、按钮尺寸的class：lg、sm、xs。</p>
+<p>5、input类型的按钮定义。</p>
+<h3 id="基础样式定义"><a href="#基础样式定义" class="headerlink" title="基础样式定义"></a>基础样式定义</h3><h4 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h4><pre><code>.btn {
+  display: inline-block;
+  ...
+  ...
+
+  &amp;,
+  &amp;:active,
+  &amp;.active {
+    &amp;:focus,
+    &amp;.focus {
+      .tab-focus();
+    }
+  }
+
+ ...
+ ...// 余下的为hover、disabled时的样式
+}</code></pre><h4 id="说明："><a href="#说明：" class="headerlink" title="说明："></a>说明：</h4><pre><code>知识点1：`&amp;`在less与scss的语法中，表示同父级，就上一个例子来说，就是编译之后`&amp;`将会被`.btn`替换，如果是多层时也是相同的道理。
+
+提示1：运用了函数tab-focus。此函数定义在mixins/tab-focus.less中，代码很短
+
+.tab-focus() {
+  outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -2px;
+}
+
+修改浏览器默认的大纲样式：表现在按钮、form表单等原生组件上。
+
+提示2：    运用了函数user-select。此函数定义在mixins/vendor-prefixes中。
+
+.user-select(@select) {
+  -webkit-user-select: @select;
+ -moz-user-select: @select;
+  -ms-user-select: @select; // IE10+
+      user-select: @select;
+}
+
+作用，让文本是否能够选择。
+
+提示3： 运用了函数opacity。此函数定义在mixins/opacity中。
+
+.opacity(@opacity) {
+  opacity: @opacity;
+  @opacity-ie: (@opacity * 100);
+  filter: ~&quot;alpha(opacity=@{opacity-ie})&quot;;
+}
+
+此处做了IE的兼容IE，IE的透明度采用 filtger:alpha(opacity=value),其中 0 &lt;= value &amp;&amp; value &lt;= 100.
+符号“~”，可以意为JavaScript里面的 evel ，可以将字符串转化为表达式。所以说一些复杂的选择器也能够作为变量定义。</code></pre><h4 id="特别说明"><a href="#特别说明" class="headerlink" title="特别说明"></a>特别说明</h4><h5 id="函数button-variant"><a href="#函数button-variant" class="headerlink" title="函数button-variant"></a>函数<code>button-variant</code></h5><pre><code>Bootstrap里面抽象出来的函数，作用于按钮不同状态下的颜色变化。例如：hover、focus、active等状态。</code></pre><p>函数说明</p>
+<pre><code>参数：@color; @background; @border // 分别时字体颜色、背景颜色、边框颜色</code></pre><p>结构如下：</p>
+<pre><code>.button-variant(@color; @background; @border) {
+  color: @color;
+  background-color: @background;
+  border-color: @border;
+
+  &amp;:focus,
+  &amp;.focus {
+    color: @color;
+    background-color: darken(@background, 10%);
+        border-color: darken(@border, 25%);
+  }
+
+ ...
+ ...// 余下的为hover、disabled时的样式
+
+  .badge {
+    color: @background;
+    background-color: @color;
+  }
+}</code></pre><p>由上面两个文件可以总结出的结论是：<em>.less里面写的是选择器定义、变量定义，而mixins/</em>.less里面写的是函数。</p>
+<h3 id="本篇总结"><a href="#本篇总结" class="headerlink" title="本篇总结"></a>本篇总结</h3><p>关于Bootstrap听到过不少的见闻，有好有坏，我有身边也有人说这个框架很垃圾。但是对于Bootstrap这个框架怎么样，我不做评价，但是Bootstrap用来作为学习的资料时非常合适的，Less的语法糖都了知道，那么如何才能让Less用起来得心应手？无疑，源码是一种途径。</p>
+<p>接下来的安排，自己写的文章自己也会去实现它，另外关于Less的学习也不会停止。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://jackyumg.github.io/2020/04/07/less%E5%AD%A6%E4%B9%A0%E4%B9%8BBootstrap%EF%BC%88%E6%8C%89%E9%92%AE%E7%AF%87%EF%BC%89/" data-id="ckcuez2lp0008q4vm6aqf59s9" class="article-share-link">分享</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/04/07/less%E5%AD%A6%E4%B9%A0%E4%B9%8BBootstrap/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          less学习之Bootstrap
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/04/07/gitFlow%E5%B7%A5%E4%BD%9C%E6%B5%81-%E7%BF%BB%E8%AF%91/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">gitFlow工作流-翻译</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/04/16/rxjs%E6%93%8D%E4%BD%9C%E7%AC%A6%E8%AF%B4%E6%98%8E/">rxjs操作符说明</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/15/css%E5%8A%A8%E7%94%BB/">css动画</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/07/%E9%9B%86%E5%90%88%E4%B8%8E%E5%AD%97%E5%85%B8/">集合与字典</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/07/%E7%94%A8JPlag%E5%9C%A8%E4%B8%80%E7%BB%84%E7%A8%8B%E5%BA%8F%E4%B8%AD%E5%AF%BB%E6%89%BE%E6%8A%84%E8%A2%AD%E8%A1%8C%E4%B8%BA%EF%BC%88%E7%BF%BB%E8%AF%91%EF%BC%89/">用JPlag在一组程序中寻找抄袭行为（翻译）</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/07/%E6%AF%8F%E5%A4%A9%E5%9D%9A%E6%8C%81%E4%B8%80%E4%B8%AACSS-%E6%BB%9A%E5%8A%A8%E6%96%87%E5%AD%97/">每天坚持一个CSS-滚动文字</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 JackYumg<br>
+      授权 <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

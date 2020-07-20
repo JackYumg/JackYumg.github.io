@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>angularV4+学习笔记 | JackYumg的学习空间</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="#angular学习笔记之组件篇  ###1注解 ####1.1组件注解@Component注解，对组件进行配置。#####1.1.1注解@Component的元数据  selector template&#x2F;templateUrl inputs&#x2F;outputs host styleUrls  ###selector:选择器 页面渲染时，Angular组件匹配的选择器, 使用方式： &lt;ip-ad">
+<meta property="og:type" content="article">
+<meta property="og:title" content="angularV4+学习笔记">
+<meta property="og:url" content="https://jackyumg.github.io/2020/04/07/angularV4+%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="JackYumg的学习空间">
+<meta property="og:description" content="#angular学习笔记之组件篇  ###1注解 ####1.1组件注解@Component注解，对组件进行配置。#####1.1.1注解@Component的元数据  selector template&#x2F;templateUrl inputs&#x2F;outputs host styleUrls  ###selector:选择器 页面渲染时，Angular组件匹配的选择器, 使用方式： &lt;ip-ad">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.imgur.com/NQG0KG1.png">
+<meta property="article:published_time" content="2020-04-07T06:11:35.172Z">
+<meta property="article:modified_time" content="2020-04-07T06:11:35.172Z">
+<meta property="article:author" content="JackYumg">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.imgur.com/NQG0KG1.png">
+  
+    <link rel="alternate" href="/atom.xml" title="JackYumg的学习空间" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">JackYumg的学习空间</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">主页</a>
+        
+          <a class="main-nav-link" href="/archives">文章列表</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://jackyumg.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-angularV4+学习笔记" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/04/07/angularV4+%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="article-date">
+  <time datetime="2020-04-07T06:11:35.172Z" itemprop="datePublished">2020-04-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      angularV4+学习笔记
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>#angular学习笔记之组件篇</p>
+<p><img src="https://i.imgur.com/NQG0KG1.png" alt=""></p>
+<p>###1注解</p>
+<p>####1.1组件注解<br><code>@Component</code>注解，对组件进行配置。<br>#####1.1.1注解@Component的元数据</p>
+<ul>
+<li><code>selector</code></li>
+<li><code>template/templateUrl</code></li>
+<li><code>inputs/outputs</code></li>
+<li><code>host</code></li>
+<li><code>styleUrls</code></li>
+</ul>
+<p>###selector:选择器</p>
+<p>页面渲染时，<code>Angular</code>组件匹配的选择器,</p>
+<p>使用方式：</p>
+<pre><code>&lt;ip-address-form&gt;&lt;/ip-address-form&gt;</code></pre><p>采用html标签的方式。<br>在《Angular权威教程》中，说明另外一种，<code>&lt;div ip-address&gt;&lt;/div&gt;</code>,这种规则与选择器匹配规则一致，也可以为class选择器，根据实际场景而用。<strong><em>（在Ideal中引入TSLint后，程序能够正常运行，但是编辑器会警告，并提示消除警告方案）</em></strong></p>
+<p>例如：</p>
+<pre><code>@Component({
+  selector: &apos;.app-single-component&apos;,
+  template: `
+  &lt;div&gt;
+    这个是子组件 ：{{name}}
+    &lt;button (click)=&quot;sendMessage()&quot; &gt;点我&lt;/button&gt;
+  &lt;/div&gt;
+  `
+})</code></pre><p>###templdate/templdateUrl：模版/模版路径<br>组件具体的html模版，<code>template</code>为模版，<code>templateUrl</code>为模版的路径。<br><code>template</code>中支持<code>es6</code>的反引号，进行多行编写，<code>templdateUrl</code>用于配置<code>html</code>模版的路径。</p>
+<p><em>注意：在<code>Typescript</code>中的构造函数只允许有一个，这也是它与<code>es6</code>的一个区别</em></p>
+<p>###inputs/output:输入/输出</p>
+<p>组件中的输入与输出，可以理解为，数据输入到组件中，数据从组件中输出到父组件中。</p>
+<p>输入使用方式:<code>[变量名]</code>，在父元素页面中使用，<code>@Input()</code>，在子组件<code>class</code>中使用,代码例子如下：</p>
+<p>####single-component.component.ts</p>
+<pre><code>@Component({
+      selector: &apos;app-single-component&apos;,
+      template: `
+          &lt;div&gt;
+            这个是子组件 ：{{name}}
+          &lt;/div&gt;
+          `
+        })
+export class SingleComponentComponent implements OnInit {
+
+  @Input () name: string ;
+
+  ngOnInit () {
+  }
+
+}</code></pre><p>####app.component.ts</p>
+<pre><code>@Component({
+  selector: &apos;app-root&apos;,
+  template: `
+    &lt;div&gt;
+      &lt;app-single-component [name]=&quot;simple&quot;&gt;&lt;/app-single-component&gt;
+  &lt;/div&gt;
+  `
+})
+export class AppComponent {
+  simple: string;
+
+  constructor () {
+    this.simple = &apos;我的世界&apos;;
+  }
+}</code></pre><p>其中input作为@Component的元数据，那么还有另外一种写法，之后的输出也一致</p>
+<p><em>其中一段代码</em></p>
+<pre><code>@Component({
+  selector: &apos;app-single-component&apos;,
+  inputs:[&apos;name&apos;],
+  template: `
+  &lt;div&gt;
+    这个是子组件 ：{{name}}
+  &lt;/div&gt;
+  `
+})</code></pre><p>输出使用方式：输出的方式或许用广播/订阅来说更加合适。</p>
+<p>####single-component.component.ts改</p>
+<pre><code>@Component({
+  selector: &apos;app-single-component&apos;,
+  template: `
+  &lt;div&gt;
+    这个是子组件 ：{{name}}
+    &lt;button (click)=&quot;sendMessage()&quot; &gt;点我&lt;/button&gt;
+  &lt;/div&gt;
+  `
+})
+export class SingleComponentComponent implements OnInit {
+
+  value: string;
+  @Input () name: string ;
+  @Output() emotter: EventEmitter&lt;string&gt;;
+
+  ngOnInit () {
+  }
+
+  constructor () {
+    this.value = &apos;来源于组件的值&apos;;
+    this.emotter = new EventEmitter&lt;string&gt;();
+  }
+
+  sendMessage (): void {
+    this.emotter.emit(this.value);
+  }
+
+}</code></pre><p>####app.component.ts改</p>
+<pre><code>@Component({
+  selector: &apos;app-root&apos;,
+  template: `
+    &lt;div&gt;
+      &lt;app-single-component [name]=&quot;simple&quot; (emotter)=&quot;getComponentData($event)&quot;&gt;&lt;/app-single-component&gt;
+  &lt;/div&gt;
+  `
+})
+export class AppComponent {
+  simple: string;
+
+  constructor () {
+    this.simple = &apos;我的世界&apos;;
+  }
+
+  getComponentData (message: string): void {
+     console.log(`获取到子组件中的值：${message}`);
+  }
+}</code></pre><p>###host:用于在元素行配置元素属性<br>值为json对象<code>key-value</code>，并且作用只做作用于当前组件内部，常用来添加<code>class</code>.<br>###styleUrls:层叠样式表url，值位数组，可以传多个。</p>
+<p>当然必要的，在需要用到的<code>component</code>的模块中引入：</p>
+<pre><code>@NgModule({
+  declarations: [
+    AppComponent,
+    SingleComponentComponent // 引入的指令，放在声明里面
+  ],
+  imports: [
+    BrowserModule // 引入的模块
+  ],
+  providers: [],
+  bootstrap: [AppComponent] //引导应用的根组件
+})
+export class AppModule { }</code></pre><p>关于@component的元数据还未完全，所以后面会继续完善。</p>
+<p><a href="http://cqorccmm.cn:8080/gitblit-1.8.0/summary/examples.git" target="_blank" rel="noopener">源代码git地址</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://jackyumg.github.io/2020/04/07/angularV4+%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" data-id="ckcuez2lk0003q4vmcblu22yc" class="article-share-link">分享</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/04/07/Sails+MVC+Mysql+Node+%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%80/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Sails+MVC+Mysql+Node+学习笔记一
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/04/07/css%E7%9A%84%E4%B8%89%E5%A4%A7%E7%89%B9%E6%80%A7/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">css的三大特性</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/04/16/rxjs%E6%93%8D%E4%BD%9C%E7%AC%A6%E8%AF%B4%E6%98%8E/">rxjs操作符说明</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/15/css%E5%8A%A8%E7%94%BB/">css动画</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/07/%E9%9B%86%E5%90%88%E4%B8%8E%E5%AD%97%E5%85%B8/">集合与字典</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/07/%E7%94%A8JPlag%E5%9C%A8%E4%B8%80%E7%BB%84%E7%A8%8B%E5%BA%8F%E4%B8%AD%E5%AF%BB%E6%89%BE%E6%8A%84%E8%A2%AD%E8%A1%8C%E4%B8%BA%EF%BC%88%E7%BF%BB%E8%AF%91%EF%BC%89/">用JPlag在一组程序中寻找抄袭行为（翻译）</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/07/%E6%AF%8F%E5%A4%A9%E5%9D%9A%E6%8C%81%E4%B8%80%E4%B8%AACSS-%E6%BB%9A%E5%8A%A8%E6%96%87%E5%AD%97/">每天坚持一个CSS-滚动文字</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 JackYumg<br>
+      授权 <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

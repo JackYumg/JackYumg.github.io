@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>css动画 | JackYumg的学习空间</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="css 动画效果动画效果1效果如图所示 https:&#x2F;&#x2F;angular-t4cuvf.stackblitz.io&#x2F; 这个加载动画在其他地方看到过 查看动态效果请查看实现思路：  拆分结构  将9个立方体才分为一个进行分析，最终得出单个立方体的结构，由三个面组成，代码如下 li{   height: @boxS &#x2F; 2;   width:@boxS;   display: inline-block;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="css动画">
+<meta property="og:url" content="https://jackyumg.github.io/2020/04/15/css%E5%8A%A8%E7%94%BB/index.html">
+<meta property="og:site_name" content="JackYumg的学习空间">
+<meta property="og:description" content="css 动画效果动画效果1效果如图所示 https:&#x2F;&#x2F;angular-t4cuvf.stackblitz.io&#x2F; 这个加载动画在其他地方看到过 查看动态效果请查看实现思路：  拆分结构  将9个立方体才分为一个进行分析，最终得出单个立方体的结构，由三个面组成，代码如下 li{   height: @boxS &#x2F; 2;   width:@boxS;   display: inline-block;">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://image-static.segmentfault.com/343/278/3432781490-5e96bf0e37e05_articlex">
+<meta property="og:image" content="https://image-static.segmentfault.com/175/697/1756972811-5e96fd9530bce_articlex">
+<meta property="article:published_time" content="2020-04-15T11:46:58.719Z">
+<meta property="article:modified_time" content="2020-07-20T10:00:36.853Z">
+<meta property="article:author" content="JackYumg">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://image-static.segmentfault.com/343/278/3432781490-5e96bf0e37e05_articlex">
+  
+    <link rel="alternate" href="/atom.xml" title="JackYumg的学习空间" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">JackYumg的学习空间</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">主页</a>
+        
+          <a class="main-nav-link" href="/archives">文章列表</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://jackyumg.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-css动画" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/04/15/css%E5%8A%A8%E7%94%BB/" class="article-date">
+  <time datetime="2020-04-15T11:46:58.719Z" itemprop="datePublished">2020-04-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      css动画
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="css-动画效果"><a href="#css-动画效果" class="headerlink" title="css 动画效果"></a>css 动画效果</h2><h3 id="动画效果1"><a href="#动画效果1" class="headerlink" title="动画效果1"></a>动画效果1</h3><p>效果如图所示<br><img src="https://image-static.segmentfault.com/343/278/3432781490-5e96bf0e37e05_articlex" alt=""></p>
+<p><a href="https://angular-6mxwve.stackblitz.io/" target="_blank" rel="noopener">https://angular-t4cuvf.stackblitz.io/</a></p>
+<p>这个加载动画在其他地方看到过</p>
+<h3 id="查看动态效果请查看"><a href="#查看动态效果请查看" class="headerlink" title="查看动态效果请查看"></a>查看动态效果请查看</h3><p>实现思路：</p>
+<ol>
+<li><p>拆分结构</p>
+<p> 将9个立方体才分为一个进行分析，最终得出单个立方体的结构，由三个面组成，代码如下</p>
+<pre><code>li{
+  height: @boxS / 2;
+  width:@boxS;
+  display: inline-block;
+  background: @theme;
+  position: relative;
+  transform: skew(-@shape, 0deg);
+  margin: @pads;
+  box-shadow: 130px 140px 10px 0px #0000002e;
+  transition: all 1s;
+  &amp;::after{
+    content: &quot;&quot;;
+    height: @boxS / 2;
+    width: @boxS;
+    display: inline-block;
+    position: absolute;
+    background: darken(@theme , 10%);
+    transform: skew(0deg, @shape);
+    top: @boxS / 2;
+    left: 100%;
+  }
+
+  &amp;::before{
+  content: &quot;&quot;;
+  height: @boxS;
+  width: @boxS;
+  display: inline-block;
+  position: absolute;
+  background: lighten(@theme , 10%);
+  transform: skew(@shape, 0deg);
+  top: @boxS / 2;
+  left: @boxS / 2;
+  } 
+}</code></pre></li>
+</ol>
+<p>2.组合结构</p>
+<p>其三行三列的结构，在DOM上可以采用3 * 3的结构，使用标签<code>ul</code>与<code>li</code>，在组合九个方块时会发现就方块时垂直排列，效果如图所示</p>
+<p><img src="https://image-static.segmentfault.com/175/697/1756972811-5e96fd9530bce_articlex" alt=""></p>
+<p>这就时我把它Dom结构才分为3个ul的原因，直接分为f_1、f_2，f3进行操作，进行微调位置，调整完成后就有了上图图一的效果。</p>
+<pre><code>&lt;div class=&quot;box-loading&quot;&gt;
+    &lt;ul class=&quot;f_1&quot;&gt;
+        &lt;li&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;ul class=&quot;f_2&quot;&gt;
+        &lt;li&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;ul class=&quot;f_3&quot;&gt;
+        &lt;li&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;div&gt;</code></pre><p>3.开始写动画</p>
+<p>首先，设计图形运动轨迹，得到运动的方式，上下运动，由于运动方式采用的时<code>transform</code>，与之前调整单个立方体的样式有冲突，最终得出以下代码。</p>
+<pre><code>@keyframes  box-load-run{
+  0%{
+    transform: translate(0px , 0px) skew(-45deg, 0deg);
+  }
+
+  50% {
+    transform: translate(0px , 12px) skew(-45deg, 0deg);
+  }
+
+  100% {
+    transform: translate(0px , 0px) skew(-45deg, 0deg);
+  }
+}</code></pre><p>然后，为了九个立方块运动时达到波浪运动的效果，那么需要计算一下动画的延迟与运动时间。为此，我设计了一个函数，该函数运行于 <code>li</code>标签下。</p>
+<pre><code>.runs(@time , @dey){
+     &amp;:first-child{
+    animation: box-load-run @time infinite ease-in-out;
+    animation-delay: @dey * 1;
+  }
+
+  &amp;:nth-child(2){
+    animation: box-load-run @time infinite ease-in-out;
+    animation-delay: @dey * 2;
+  }
+
+  &amp;:last-child{
+    animation: box-load-run @time infinite ease-in-out;
+    animation-delay: @dey * 3;
+  }
+}</code></pre><p>参数说明：<code>@time</code>：运行时间 <code>@dey</code>：运动延迟。</p>
+<p>为了达到比较好的动画效果，我们需要动画有来有回，平缓过度，所以采用的时<code>ease-in-out</code>。</p>
+<p>最后配合一个启动样式完成动画效果。</p>
+<pre><code>.f_1{
+  li{
+     .runs(1.2s , 0.1s );
+  }
+}
+
+.f_2{
+  li{
+    .runs(1.2s , 0.2s);
+  }
+}
+
+.f_3{
+   li{
+    .runs(1.2s , 0.3s );
+  }
+}</code></pre><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这种动画效果早已经被人写出来，但是我依然要自己实现一遍，主要目的不是为了写动画效果，而是为了巩固自己的知识点、查看自己的不足。举个例子，在写这个动画的时候自己还对less的函数不熟悉。</p>
+<p>第一点：<code>.runs</code>这个函数，里面的内容仍然可以优化。使用<code>less</code>的<code>for</code>循环。</p>
+<p>第二点: 页面结构只需要采用一个<code>ul</code>标签也可以完成，配合上css的伪元素选择器、less的循环与条件语句。</p>
+<p>第三点：作为前端开发更需要一个自己的积累，积累到一定程度一定会发生质的改变，希望能够形成自己的规范或者技术圈子，并让大家探讨。</p>
+<p>动画效果地址：<a href="https://angular-t4cuvf.stackblitz.io/boxLoad" target="_blank" rel="noopener">https://angular-t4cuvf.stackblitz.io/boxLoad</a></p>
+<p><strong>本示例使用的css预编译语言 less。</strong></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://jackyumg.github.io/2020/04/15/css%E5%8A%A8%E7%94%BB/" data-id="ckcuez2lj0002q4vm23sug0zr" class="article-share-link">分享</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/04/16/rxjs%E6%93%8D%E4%BD%9C%E7%AC%A6%E8%AF%B4%E6%98%8E/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          rxjs操作符说明
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/04/07/%E9%9B%86%E5%90%88%E4%B8%8E%E5%AD%97%E5%85%B8/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">集合与字典</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/04/16/rxjs%E6%93%8D%E4%BD%9C%E7%AC%A6%E8%AF%B4%E6%98%8E/">rxjs操作符说明</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/15/css%E5%8A%A8%E7%94%BB/">css动画</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/07/%E9%9B%86%E5%90%88%E4%B8%8E%E5%AD%97%E5%85%B8/">集合与字典</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/07/%E7%94%A8JPlag%E5%9C%A8%E4%B8%80%E7%BB%84%E7%A8%8B%E5%BA%8F%E4%B8%AD%E5%AF%BB%E6%89%BE%E6%8A%84%E8%A2%AD%E8%A1%8C%E4%B8%BA%EF%BC%88%E7%BF%BB%E8%AF%91%EF%BC%89/">用JPlag在一组程序中寻找抄袭行为（翻译）</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/07/%E6%AF%8F%E5%A4%A9%E5%9D%9A%E6%8C%81%E4%B8%80%E4%B8%AACSS-%E6%BB%9A%E5%8A%A8%E6%96%87%E5%AD%97/">每天坚持一个CSS-滚动文字</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 JackYumg<br>
+      授权 <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

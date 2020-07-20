@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>css的三大特性 | JackYumg的学习空间</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="css基础复习css的三大特性1、继承性css中的继承性，与其他语言的继承性相比是有区别的，  部分属性继承。 多级子代继承。  - 可继承属性：字体，文本等属性，颜色、font-开头、text-开头、line-开头的、white-space。 - 不可继承属性：边框、外边距、内边距、背景、定位、高度、浮动  &#96;注意：不容易找出其属性的来源，因此在开发时需要找父级元素，从而找出样式来源，并得到解决">
+<meta property="og:type" content="article">
+<meta property="og:title" content="css的三大特性">
+<meta property="og:url" content="https://jackyumg.github.io/2020/04/07/css%E7%9A%84%E4%B8%89%E5%A4%A7%E7%89%B9%E6%80%A7/index.html">
+<meta property="og:site_name" content="JackYumg的学习空间">
+<meta property="og:description" content="css基础复习css的三大特性1、继承性css中的继承性，与其他语言的继承性相比是有区别的，  部分属性继承。 多级子代继承。  - 可继承属性：字体，文本等属性，颜色、font-开头、text-开头、line-开头的、white-space。 - 不可继承属性：边框、外边距、内边距、背景、定位、高度、浮动  &#96;注意：不容易找出其属性的来源，因此在开发时需要找父级元素，从而找出样式来源，并得到解决">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-04-07T06:11:35.172Z">
+<meta property="article:modified_time" content="2020-04-07T06:11:35.172Z">
+<meta property="article:author" content="JackYumg">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="JackYumg的学习空间" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">JackYumg的学习空间</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">主页</a>
+        
+          <a class="main-nav-link" href="/archives">文章列表</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://jackyumg.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-css的三大特性" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/04/07/css%E7%9A%84%E4%B8%89%E5%A4%A7%E7%89%B9%E6%80%A7/" class="article-date">
+  <time datetime="2020-04-07T06:11:35.172Z" itemprop="datePublished">2020-04-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      css的三大特性
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="css基础复习"><a href="#css基础复习" class="headerlink" title="css基础复习"></a>css基础复习</h2><h3 id="css的三大特性"><a href="#css的三大特性" class="headerlink" title="css的三大特性"></a>css的三大特性</h3><h4 id="1、继承性"><a href="#1、继承性" class="headerlink" title="1、继承性"></a>1、继承性</h4><p>css中的继承性，与其他语言的继承性相比是有区别的，</p>
+<ol>
+<li>部分属性继承。</li>
+<li>多级子代继承。</li>
+</ol>
+<pre><code>- 可继承属性：字体，文本等属性，颜色、font-开头、text-开头、line-开头的、white-space。
+- 不可继承属性：边框、外边距、内边距、背景、定位、高度、浮动
+
+`注意：不容易找出其属性的来源，因此在开发时需要找父级元素，从而找出样式来源，并得到解决方案`</code></pre><h4 id="2、优先级"><a href="#2、优先级" class="headerlink" title="2、优先级"></a>2、优先级</h4><p>css中的优先级，在面对两个样式作用于同一元素，同一个属性，不同值时，浏览器的选择标准是基于css权重做判断的，浏览器按照css的规则得出css的权重从而得出样式的优先级，优先展示权重高的样式。</p>
+<h5 id="css权重计算规则"><a href="#css权重计算规则" class="headerlink" title="css权重计算规则"></a>css权重计算规则</h5><h6 id="权重参考表"><a href="#权重参考表" class="headerlink" title="权重参考表"></a>权重参考表</h6><table>
+    <thead>
+          <tr>
+            <th>元素</th>
+            <th>贡献值</th>
+          </tr>
+    </thead>
+  <tr>
+    <td>继承、*</td>
+    <td>0，0，0，0</td>
+  </tr>
+  <tr>
+    <td>标签</td>
+    <td>0，0，0，1</td>
+  </tr>
+  <tr>
+    <td>类、伪类</td>
+    <td>0，0，1，0</td>
+  </tr>
+ <tr>
+    <td>ID</td>
+    <td>0，1，0，0</td>
+  </tr>
+ <tr>
+    <td>行内样式</td>
+    <td>1，0，0，0</td>
+  </tr>
+ <tr>
+    <td>!important</td>
+    <td>无穷大</td>
+  </tr>
+ <tr>
+    <td>max-height、max-width覆盖width、height</td>
+    <td>大于无穷大</td>
+  </tr>
+ <tr>
+    <td>min-height、max-width</td>
+    <td>大于max-height、max-width</td>
+  </tr>
+</table>
+
+<h6 id="计算规则"><a href="#计算规则" class="headerlink" title="计算规则"></a>计算规则</h6><p>1、按照贡献值累加，同位相加不会超过10就进位。<br>2、权重不会被子元素继承，可以理解为继承的只能是属性，权重是人为制定的规则，如1所示。<br>3、min-height/min-width &gt; max-height/max-width &gt; !important &gt; 行内样式 &gt; ID选择器 &gt; 类选择器、属性选择器、伪元素和伪类选择器 &gt; 元素选择器 &gt; 通用选择器</p>
+<h4 id="3、特殊性-层叠性"><a href="#3、特殊性-层叠性" class="headerlink" title="3、特殊性/层叠性"></a>3、特殊性/层叠性</h4><p>可覆盖，当两个作用于同一元素的样式权重一样大时，按照css加载顺序进行渲染，原因与html渲染机制相关。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://jackyumg.github.io/2020/04/07/css%E7%9A%84%E4%B8%89%E5%A4%A7%E7%89%B9%E6%80%A7/" data-id="ckcuez2ll0004q4vm875t02ga" class="article-share-link">分享</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/04/07/angularV4+%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          angularV4+学习笔记
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/04/07/JS%E5%9F%BA%E7%A1%80-%EF%BC%88%E7%B1%BB%E5%9E%8B%E7%AF%87%EF%BC%89/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">JS基础-（类型篇）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/04/16/rxjs%E6%93%8D%E4%BD%9C%E7%AC%A6%E8%AF%B4%E6%98%8E/">rxjs操作符说明</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/15/css%E5%8A%A8%E7%94%BB/">css动画</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/07/%E9%9B%86%E5%90%88%E4%B8%8E%E5%AD%97%E5%85%B8/">集合与字典</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/07/%E7%94%A8JPlag%E5%9C%A8%E4%B8%80%E7%BB%84%E7%A8%8B%E5%BA%8F%E4%B8%AD%E5%AF%BB%E6%89%BE%E6%8A%84%E8%A2%AD%E8%A1%8C%E4%B8%BA%EF%BC%88%E7%BF%BB%E8%AF%91%EF%BC%89/">用JPlag在一组程序中寻找抄袭行为（翻译）</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/07/%E6%AF%8F%E5%A4%A9%E5%9D%9A%E6%8C%81%E4%B8%80%E4%B8%AACSS-%E6%BB%9A%E5%8A%A8%E6%96%87%E5%AD%97/">每天坚持一个CSS-滚动文字</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 JackYumg<br>
+      授权 <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

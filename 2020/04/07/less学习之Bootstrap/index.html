@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>less学习之Bootstrap | JackYumg的学习空间</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="less学习笔记之bootstrap目录说明源代码里面的目录是这样的(只给出部分)： .csscomb.json │  .csslintrc │  alerts.less │  badges.less │  bootstrap.less │  breadcrumbs.less │  button-groups.less │  buttons.less │  carousel.less │  clo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="less学习之Bootstrap">
+<meta property="og:url" content="https://jackyumg.github.io/2020/04/07/less%E5%AD%A6%E4%B9%A0%E4%B9%8BBootstrap/index.html">
+<meta property="og:site_name" content="JackYumg的学习空间">
+<meta property="og:description" content="less学习笔记之bootstrap目录说明源代码里面的目录是这样的(只给出部分)： .csscomb.json │  .csslintrc │  alerts.less │  badges.less │  bootstrap.less │  breadcrumbs.less │  button-groups.less │  buttons.less │  carousel.less │  clo">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.imgur.com/TrXTQaW.png">
+<meta property="article:published_time" content="2020-04-07T06:11:35.174Z">
+<meta property="article:modified_time" content="2020-04-07T06:11:35.174Z">
+<meta property="article:author" content="JackYumg">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.imgur.com/TrXTQaW.png">
+  
+    <link rel="alternate" href="/atom.xml" title="JackYumg的学习空间" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">JackYumg的学习空间</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">主页</a>
+        
+          <a class="main-nav-link" href="/archives">文章列表</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://jackyumg.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-less学习之Bootstrap" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/04/07/less%E5%AD%A6%E4%B9%A0%E4%B9%8BBootstrap/" class="article-date">
+  <time datetime="2020-04-07T06:11:35.174Z" itemprop="datePublished">2020-04-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      less学习之Bootstrap
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="less学习笔记之bootstrap"><a href="#less学习笔记之bootstrap" class="headerlink" title="less学习笔记之bootstrap"></a>less学习笔记之bootstrap</h3><h4 id="目录说明"><a href="#目录说明" class="headerlink" title="目录说明"></a>目录说明</h4><h5 id="源代码里面的目录是这样的-只给出部分-："><a href="#源代码里面的目录是这样的-只给出部分-：" class="headerlink" title="源代码里面的目录是这样的(只给出部分)："></a>源代码里面的目录是这样的(只给出部分)：</h5><pre><code> .csscomb.json
+│  .csslintrc
+│  alerts.less
+│  badges.less
+│  bootstrap.less
+│  breadcrumbs.less
+│  button-groups.less
+│  buttons.less
+│  carousel.less
+│  close.less
+│  ...
+│
+└─mixins
+    alerts.less
+    background-variant.less
+    border-radius.less
+    buttons.less
+    center-block.less
+    clearfix.less
+    forms.less
+    gradients.less
+    ...</code></pre><h4 id="文件-variables-less"><a href="#文件-variables-less" class="headerlink" title="文件 variables.less"></a>文件 <code>variables.less</code></h4><p>顾名思义，为整个Bootstrap定义的全局变量。</p>
+<pre><code>知识点一：
+Less的作用域和css很相似，变量和混合（mixins）在当前文件无法找到时会继承父级作用，如果任然没有找到则会编译抛出异常。</code></pre><h5 id="定义在Bootstrap中使用的灰色和品牌颜色。"><a href="#定义在Bootstrap中使用的灰色和品牌颜色。" class="headerlink" title="定义在Bootstrap中使用的灰色和品牌颜色。"></a>定义在Bootstrap中使用的灰色和品牌颜色。</h5><pre><code>@gray-base:  #000;
+@gray-darker:lighten(@gray-base, 13.5%);
+@gray-dark:  lighten(@gray-base, 20%); 
+@gray:   lighten(@gray-base, 33.5%); // #555
+@gray-light: lighten(@gray-base, 46.7%); 
+@gray-lighter:   lighten(@gray-base, 93.5%); 
+
+// 这部分定义的主要色：成功、失败、警告等等。
+@brand-primary:         darken(#428bca, 6.5%); // #337ab7
+@brand-success:         #5cb85c;
+@brand-info:            #5bc0de;
+@brand-warning:         #f0ad4e;
+@brand-danger:          #d9534f;</code></pre><p>具体体现：</p>
+<p><img src="https://i.imgur.com/TrXTQaW.png" alt=""></p>
+<pre><code>知识点2：函数 lighten与darken
+描述： 参数：`color, amount, method`
+功能： `color + amount` 表示在`color`的基础上，
+变得更淡或者更深,加上method后表示在`color * method` 的基础上，变淡/深 amount，
+这里先不解释less中色值是怎么计算的。</code></pre><p>之后也定义了默认背景色。</p>
+<h5 id="定义字体风格"><a href="#定义字体风格" class="headerlink" title="定义字体风格"></a>定义字体风格</h5><h6 id="字体大小定义"><a href="#字体大小定义" class="headerlink" title="字体大小定义"></a>字体大小定义</h6><p>Bootstrap的基础字体为14px。</p>
+<pre><code>知识点3：函数ceil和floor
+简单说明：分别为向上取整和向下取整</code></pre><h6 id="输入框风格定义"><a href="#输入框风格定义" class="headerlink" title="输入框风格定义"></a>输入框风格定义</h6><pre><code>cursor：not-allowed //当button与input处于disabled时，鼠标指针的样式</code></pre><h5 id="优先级定义"><a href="#优先级定义" class="headerlink" title="优先级定义"></a>优先级定义</h5><p>设置一些默认层级优先级z-index，用于特定的组件，例如：navbar、dropdown、popover、modal-background、tooltip、navbar-fixed。值都为1000+，这也就是有时候我们自己自定义了一些优先级，但是还是达不到效果，可以想一想是不是值不够？</p>
+<p>###less的坑<br>在实际的运用less中，遇到的问题。<br>1、就是使用<code>calc(100% - 50px)</code>，发现有时候通过调试看到不是像自己写的一样，这时候需要使用<code>~</code>进行处理 如： <code>calc(~&quot;100% - 50px&quot;)</code>(一定要用双引号)。</p>
+<p>2、在页面调试的时候，有时候对颜色增加透明度或者其操作，得到的色值不是#六位，而是#八位，对于#八位，在编译后不一定能够正确展示在页面，这个时候就需要使用less的函数<code>fade</code>。fade(#<strong>**</strong>, n%).</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://jackyumg.github.io/2020/04/07/less%E5%AD%A6%E4%B9%A0%E4%B9%8BBootstrap/" data-id="ckcuez2ln0006q4vm9mi2er9s" class="article-share-link">分享</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/04/07/%E6%AF%8F%E5%A4%A9%E5%9D%9A%E6%8C%81%E4%B8%80%E4%B8%AACSS-%E7%A4%BE%E4%BC%9A%E4%BA%BA/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          每天坚持一个CSS-社会人
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/04/07/less%E5%AD%A6%E4%B9%A0%E4%B9%8BBootstrap%EF%BC%88%E6%8C%89%E9%92%AE%E7%AF%87%EF%BC%89/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">less学习之Bootstrap（按钮篇）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/04/16/rxjs%E6%93%8D%E4%BD%9C%E7%AC%A6%E8%AF%B4%E6%98%8E/">rxjs操作符说明</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/15/css%E5%8A%A8%E7%94%BB/">css动画</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/07/%E9%9B%86%E5%90%88%E4%B8%8E%E5%AD%97%E5%85%B8/">集合与字典</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/07/%E7%94%A8JPlag%E5%9C%A8%E4%B8%80%E7%BB%84%E7%A8%8B%E5%BA%8F%E4%B8%AD%E5%AF%BB%E6%89%BE%E6%8A%84%E8%A2%AD%E8%A1%8C%E4%B8%BA%EF%BC%88%E7%BF%BB%E8%AF%91%EF%BC%89/">用JPlag在一组程序中寻找抄袭行为（翻译）</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/07/%E6%AF%8F%E5%A4%A9%E5%9D%9A%E6%8C%81%E4%B8%80%E4%B8%AACSS-%E6%BB%9A%E5%8A%A8%E6%96%87%E5%AD%97/">每天坚持一个CSS-滚动文字</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 JackYumg<br>
+      授权 <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
