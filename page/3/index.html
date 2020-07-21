@@ -64,6 +64,194 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-gitFlow工作流-翻译" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/04/07/gitFlow%E5%B7%A5%E4%BD%9C%E6%B5%81-%E7%BF%BB%E8%AF%91/" class="article-date">
+  <time datetime="2020-04-07T06:11:35.173Z" itemprop="datePublished">2020-04-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/07/gitFlow%E5%B7%A5%E4%BD%9C%E6%B5%81-%E7%BF%BB%E8%AF%91/">gitFlow工作流-翻译</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Gitflow-工作流"><a href="#Gitflow-工作流" class="headerlink" title="Gitflow 工作流"></a>Gitflow 工作流</h1><p><em>图片如果未正常加载，请使用翻墙工具或跳转至原文</em></p>
+<p>Gitflow Workflow 是一种 Git 工作流程设计，由 nvie 的 Vincent Driessen 首次发布并广受欢迎。这个 Gitflow workflow 围绕着项目的发布定义了严格的分支模型，为管理大型项目提供了强大的框架。</p>
+<p>Gitflow 非常适合具有发布周期计划的项目。这个工作流程没有新增任何超出功能分支工作流程的新概念或者命令。相反，它给与不同的分值赋予了不同的角色，定义了怎样以及什么时候进行互动。除了功能分支。除了功能分支外，它还使用各个分支来准备，维护和记录版本。当然，您还可以利用Feature Branch Workflow 的所有好处：拉取请求，孤立的实验和更有效的协作。</p>
+<h2 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h2><p>Gitflow 实际上只是 Git 工作流程的抽象概念。 这意味着它决定了要建立哪种分支以及如何将它们合并在一起。 我们将触及以下分支的目的。 git-flow 工具集是具有安装过程的实际命令行工具。 git-flow 的安装过程很简单。 git-flow 的软件包可在多个操作系统上使用。 在 OSX 系统上，您可以执行 brew install git-flow。 在Windows上，您需要下载并安装 git-flow 。 安装git-flow后，您可以通过执行 git flow init 在项目中使用它。 Git-flow 是围绕 Git 的包装。 git flow init 命令是默认 git init 命令的扩展，除了为您创建分支外，不会更改存储库中的任何内容。</p>
+<h2 id="工作机制"><a href="#工作机制" class="headerlink" title="工作机制"></a>工作机制</h2><p><img src="https://i.imgur.com/6T1l1mG.png" alt="图片"></p>
+<h2 id="Develop-and-Master-开发与主分支"><a href="#Develop-and-Master-开发与主分支" class="headerlink" title="Develop and Master (开发与主分支)"></a>Develop and Master (开发与主分支)</h2><p>Gitflow 工作流程使用两个分支代替了单个主分支去记录项目的历史。 master 分支存储正式的发布历史记录，develop 分支充当功能的集成分支。使用版本号标记 master 分支中的所有提交也很方便。</p>
+<p>第一步是用一个 develop 分支来补充默认的 master 。 一种简单的方法是让一个开发人员在本地创建一个空的 develop 分支并将其推送到服务器：</p>
+<pre><code>git branch develop
+git push -u origin develop</code></pre><p>该分支将包含项目的完整历史记录，而 master 将包含简化版本。 现在，其他开发人员应该克隆中央存储库，并为开发创建跟踪分支。</p>
+<p>使用 git-flow 扩展库时，在现有存储库上执行 git flow init 将创建开发分支：</p>
+<pre><code>$ git flow init
+Initialized empty Git repository in ~/project/.git/
+No branches exist yet. Base branches must be created now.
+Branch name for production releases: [master]
+Branch name for &quot;next release&quot; development: [develop]
+
+How to name your supporting branch prefixes?
+Feature branches? [feature/]
+Release branches? [release/]
+Hotfix branches? [hotfix/]
+Support branches? [support/]
+Version tag prefix? []
+
+$ git branch
+* develop
+ master</code></pre><h2 id="Feature-Branches-功能分支"><a href="#Feature-Branches-功能分支" class="headerlink" title="Feature Branches(功能分支)"></a>Feature Branches(功能分支)</h2><p>每个新功能都应驻留在其自己的分支中，可以将其推送到中央存储库以进行备份/协作。 但是，功能分支不是将其合并到主分支，而是将 develop 分支用作其父分支。 功能完成后，它会重新合并到开发中。 Feature 分支绝不能直接与 master 进行交互。</p>
+<p><img src="https://i.imgur.com/uMDvv5K.png" alt=""></p>
+<p>注意，将功能分支与开发分支结合使用达到了完成功能分支工作流程的所有的目的与意图。但是，Gitflow 工作流并不止于此。</p>
+<p>通常创建功能分支到最新的开发分支。</p>
+<h3 id="创建一个功能分支"><a href="#创建一个功能分支" class="headerlink" title="创建一个功能分支"></a>创建一个功能分支</h3><p>没有 git-flow 的情景</p>
+<pre><code>git checkout develop
+git checkout -b feature_branch</code></pre><p>使用 gti-flow 的情景</p>
+<pre><code>git flow feature start feature_branch</code></pre><p>像平常一样继续工作并使用 Git。</p>
+<h3 id="完成一个功能分支"><a href="#完成一个功能分支" class="headerlink" title="完成一个功能分支"></a>完成一个功能分支</h3><p>当你完成了一个功能的开发，下一步就是将功能分支合并到 develop 分支</p>
+<p>没有 git-flow 的情景</p>
+<pre><code>git checkout develop
+git merge feature_branch</code></pre><p>使用 gti-flow 的情景</p>
+<pre><code>git flow feature finish feature_branch</code></pre><h2 id="Release分支-发布分支"><a href="#Release分支-发布分支" class="headerlink" title="Release分支(发布分支)"></a>Release分支(发布分支)</h2><p><img src="https://i.imgur.com/ZJzDJul.png" alt=""></p>
+<p>一旦 develop 分支获得了足够的功能以进行发布（或临近预定的发布日期），就可以从 develop 分支分支发布。 创建此分支将开始下一个发行周期，因此此刻之后此发布分支无法添加任何新功能-该分支中仅应包含错误修复，文档生成以及其他面向发行版的任务。 一旦准备好发布，发行分支将合并到 master 并用版本号标记。 此外，应该将其重新合并到开发中，而自发布以来，该过程可能已经进行了。</p>
+<p>使用专门的分支来准备发布，使一个团队可以完善当前版本，而另一个团队可以继续开发下一个版本的功能。 它还创建了明确定义的开发阶段（例如，很容易地说：“本周我们正在为版本 4.0 作准备，并在存储库的结构中实际看到它）。</p>
+<pre><code>说明:专门的分支是指的Release分支，并非Master分支</code></pre><p>进行发布分支是另一种直接的分支操作。 像功能分支一样，发布分支也基于开发分支。 可以使用以下方法创建新的发行分支。</p>
+<p>没有 git-flow 的情景</p>
+<pre><code>git checkout develop
+git checkout -b release/0.1.0</code></pre><p>使用 gti-flow 的情景</p>
+<pre><code>git flow release start 0.1.0
+Switched to a new branch &apos;release/0.1.0&apos;</code></pre><p>一旦这个版本准备好发布，它将被合并到master中并进行开发，然后发布分支将被删除。 重要的是将其重新合并到 develop 分支中，因为关键更新可能已添加到 release 分支，并且新功能需要访问这些更新。 如果您的团队强调代码审查，那么这将是请求请求的理想场所。</p>
+<p>要完成发行分支，请使用以下方法：</p>
+<p>没有 git-flow 的情景</p>
+<pre><code>git checkout master
+git merge release/0.1.0</code></pre><p>使用 gti-flow 的情景</p>
+<pre><code>git flow release finish &apos;0.1.0&apos;</code></pre><h2 id="Hotfix-Branches-修补程序分支-热修复分支"><a href="#Hotfix-Branches-修补程序分支-热修复分支" class="headerlink" title="Hotfix Branches / 修补程序分支/热修复分支"></a>Hotfix Branches / 修补程序分支/热修复分支</h2><p><img src="https://i.imgur.com/2NAoLDJ.png" alt=""></p>
+<p>维护或“修补程序”分支用于快速修补生产版本。 修补程序分支与发行分支和功能分支很像，只是它们基于主版本而不是开发版本。 这是唯一应直接从master分支的分支。 修复程序完成后，应将其合并到master分支和develop分支（或当前发行版分支）中，并应使用更新的版本号标记master。</p>
+<p>拥有专门的错误修复开发线，您的团队可以在不中断其余工作流程或不等待下一个发布周期的情况下解决问题。 您可以将维护分支视为直接与master一起使用的临时发行分支。 可以使用以下方法创建修补程序分支：</p>
+<p>没有 git-flow 的情景</p>
+<pre><code>   git checkout master
+git checkout -b hotfix_branch</code></pre><p>使用 gti-flow 的情景</p>
+<pre><code>git flow hotfix start hotfix_branch</code></pre><p>与完成发行分支相似，修补程序分支也合并到master和development中。</p>
+<pre><code>git checkout master
+git merge hotfix_branch
+git checkout develop
+git merge hotfix_branch
+git branch -D hotfix_branch</code></pre><p><a href="https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow" target="_blank" rel="noopener" title="git flow 教程">原文链接</a></p>
+<h2 id="自我理解"><a href="#自我理解" class="headerlink" title="自我理解"></a>自我理解</h2><p>以下内容纯粹个人杜撰</p>
+<p>（master）主分支的作用：记录项目的发布历史版本，每次向生产环境部署一次，算是一个版本。</p>
+<p>（develop）开发分支的作用：用于开发工作，相当于单分支开发时的 master 分支，在 master 分支上拉取、修改、推送。</p>
+<p>（Feature）功能分支的作用：用于开发新功能，开发完成后合并到 develop 分支。修复develop的功能，修复完后同样合并到 develop 分支。</p>
+<p>（release）发布分支的作用：在达到一个阶段后，项目需要发布准备（测试、文档生成等）。如果在 release 分支中发生改变，那么也需要合并到 master 分支与 develop 分支。</p>
+<p>（Hotfix）热修复分支的作用：当正式环境中发现错误需要即时修复时，从 master 分支拉下来，新建 Hotfix 分支，对程序里的错误进行修复、发布，修复、发布后合并到 master 与 develop ，给master打上新标签。</p>
+<h3 id="问题1"><a href="#问题1" class="headerlink" title="问题1"></a>问题1</h3><p>从开发效率上来讲，基本的单分支模型与此 git flow 模型相比，那种效率更高？</p>
+<h3 id="问题2"><a href="#问题2" class="headerlink" title="问题2"></a>问题2</h3><p>开发这么多分支那些是在本地，那些可以上传到 git 服务器上？</p>
+<h3 id="问题3"><a href="#问题3" class="headerlink" title="问题3"></a>问题3</h3><p>这么多分支，维护起来是否很麻烦？</p>
+<h3 id="问题4"><a href="#问题4" class="headerlink" title="问题4"></a>问题4</h3><p>这种 git 模型适合那些类型的项目？不适合那些项目？</p>
+<h2 id="项目类型"><a href="#项目类型" class="headerlink" title="项目类型"></a>项目类型</h2><p><img src="https://i.imgur.com/nOyBsrl.png" alt=""></p>
+<h3 id="单一型产品"><a href="#单一型产品" class="headerlink" title="单一型产品"></a>单一型产品</h3><h4 id="特点：通用、不分区域，再无强制更新的情况下老版本基本上仍然能够正常使用。也可能由于更新的不及时可能导致无法正常工作或缺少一些功能支持，例如-“浏览器”。"><a href="#特点：通用、不分区域，再无强制更新的情况下老版本基本上仍然能够正常使用。也可能由于更新的不及时可能导致无法正常工作或缺少一些功能支持，例如-“浏览器”。" class="headerlink" title="特点：通用、不分区域，再无强制更新的情况下老版本基本上仍然能够正常使用。也可能由于更新的不及时可能导致无法正常工作或缺少一些功能支持，例如 “浏览器”。"></a>特点：通用、不分区域，再无强制更新的情况下老版本基本上仍然能够正常使用。也可能由于更新的不及时可能导致无法正常工作或缺少一些功能支持，例如 “浏览器”。</h4><h3 id="框架型产品"><a href="#框架型产品" class="headerlink" title="框架型产品"></a>框架型产品</h3><h4 id="特点：因某些原因导致不通用-数据不统一-，例子：一个交通管理类的系统，各个省份之间数据设计不同，导致每个省份都需要一个类似的系统，业务相同、操作相同又各有特点，每个版本必须强制更新。"><a href="#特点：因某些原因导致不通用-数据不统一-，例子：一个交通管理类的系统，各个省份之间数据设计不同，导致每个省份都需要一个类似的系统，业务相同、操作相同又各有特点，每个版本必须强制更新。" class="headerlink" title="特点：因某些原因导致不通用(数据不统一)，例子：一个交通管理类的系统，各个省份之间数据设计不同，导致每个省份都需要一个类似的系统，业务相同、操作相同又各有特点，每个版本必须强制更新。"></a>特点：因某些原因导致不通用(数据不统一)，例子：一个交通管理类的系统，各个省份之间数据设计不同，导致每个省份都需要一个类似的系统，业务相同、操作相同又各有特点，每个版本必须强制更新。</h4><h3 id="框架"><a href="#框架" class="headerlink" title="框架"></a>框架</h3><h4 id="特点：通用，发布过的所有历史版本需要一直维护，需要考虑向下、向上兼容，不维护后劝升级、提供升级途径。例如：-Angular-或其他。"><a href="#特点：通用，发布过的所有历史版本需要一直维护，需要考虑向下、向上兼容，不维护后劝升级、提供升级途径。例如：-Angular-或其他。" class="headerlink" title="特点：通用，发布过的所有历史版本需要一直维护，需要考虑向下、向上兼容，不维护后劝升级、提供升级途径。例如： Angular 或其他。"></a>特点：通用，发布过的所有历史版本需要一直维护，需要考虑向下、向上兼容，不维护后劝升级、提供升级途径。例如： Angular 或其他。</h4><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>在实际开发中，如果参与人员多、项目规模大，在效率上理论上是比单分支模型高，规范的 git 流程能够大大减少开发冲突，除此外规范的流程在线上出现紧急问题时具有更好的风险抗压能力与风险处理能力。</p>
+<p>在git服务器上的分支可以是master 、 develop、 release。release 是发布版本一般情况下在发布后会合并到 master 与 develop，然后删除该分支，但是如果是框架（jQuery）这种，也有可能发布一个1.2.0等，那这个版本是可以上传到远程 git 服务器的。其他的Feature、Hostfix是在本地处理的，处理完成后可以合并到 master 与 develop分支。</p>
+<p>分支这么多肯定会变得麻烦，不过这种方式是在开发人员多、项目规模大的情景下使用，一般小团队可以采用“集中模型”进行开发。</p>
+<p>在列出的项目类型中，通过他们的特点，看出单一型、框架型比较适合，框架型产品不是太适合，在采用那种 git 模型时，还应根据项目实际规模来决定采用那种方式。<br><a href="https://www.atlassian.com/git/tutorials/comparing-workflows" target="_blank" rel="noopener">其他分支模型</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://jackyumg.github.io/2020/04/07/gitFlow%E5%B7%A5%E4%BD%9C%E6%B5%81-%E7%BF%BB%E8%AF%91/" data-id="ckcuez2lm0005q4vm9y2114cq" class="article-share-link">分享</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Sails+MVC+Mysql+Node+学习笔记一" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/04/07/Sails+MVC+Mysql+Node+%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%80/" class="article-date">
+  <time datetime="2020-04-07T06:11:35.172Z" itemprop="datePublished">2020-04-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/07/Sails+MVC+Mysql+Node+%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%80/">Sails+MVC+Mysql+Node+学习笔记一</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="http://sailsjs.com/images/hero_squid.png" alt="这里写图片描述"><br>##项目构建<br>安装Node就不多说了，<br>###1.sails安装与项目新建运行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">npm install sails -g&#x2F;&#x2F;全局安装</span><br><span class="line"></span><br><span class="line">sails new project-name&#x2F;&#x2F;新建项目</span><br><span class="line"></span><br><span class="line">cd project-name &#x2F;&#x2F;进入刚才新建项目的目录</span><br><span class="line"></span><br><span class="line">sails lift &#x2F;&#x2F;运行项目，运行原理也是直接在项目目录路径下使用node app.js</span><br><span class="line">npm install sails-mysql --save &#x2F;&#x2F;--save 把安装的模块写进package.json</span><br></pre></td></tr></table></figure>
+<p>到了这一步，环境算是搭建完成。<br>###2.目录结构介绍</p>
+<p><img src="http://img.blog.csdn.net/20170827195403601?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcGVyc29uRmVhdA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>####2.1api<br>在api目录下，有着controller、hooks、models、policies、responses和services几个目录</p>
+<ol>
+<li>controller目录下存放的就是页面与后台服务器通讯的接口，如果对应的java，那么就是java里面的Action层或者使用Spring<br>MVC ，那么也是对应的Controller，里面存放的就是接口。</li>
+<li>models,数据模型层，也就是实体层，对应java里面的entity。</li>
+<li>policies(策略),在controller之前执行，主要工作是session认证，如果session是认证通过了，那么就可以进入下一个策略或者如果是最后一个策略，那么就可以进入controller了，个人感觉像是java里的过滤器或者分发器。</li>
+<li>responses,自定义的响应。举个例子，一般从前台发出一个请求后，如果经过了服务器，那么都会给客户端返回一个结果，除了本身自带的响应方式，也可以采用自定义的响应，比如返回一个404页面，返回500页面或者返回字符串等等。</li>
+<li>services,业务逻辑处理层，采用es6的Module的语法编写。<br>####2.2assets静态资源层<br>在这层目录里面有，js，image，styles,templates，这个目录里面主要放的就是静态资源，没什么说的。<br>####2.3config配置层<br>这层里面有env和locales两层，然后和一些js。</li>
+</ol>
+<p>env中有一个development.js里面的注释是如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">开发环境配置，这个文件夹里面包含了开发团队共享的一些配置，比如api的名称，数据库的密码，如果你在你的Sails应用中使用了版本控制器，这个文件也会提交到你的资源仓库里面，除非你在gitignore中添加了一个信息，表明这个文件是私有的或不公开的。</span><br></pre></td></tr></table></figure>
+
+<p>env中的production.js里的注释如下：<br>项目环境配置，与development类似，但是从注释中看到要多一些东西，比如配置端口的和日志的</p>
+<p>####2.4task任务层<br>这层里面主要放置的是grunt的任务，<br>####2.5views层<br>这一层主要放置的是作为展示的前台页面，一种情况是使用node做单纯的后台服务器，不处理前台业务，而另外一种情况是采用模块化的思想，对结构进行分层，达到MVC的合理实现，本来Sails就是一个MVC框架所以第一种情况还是不太会出现。<br>###3开始搭建项目<br>整体流程：新建数据库 -&gt; 新建表 -&gt; 建实体 -&gt; 在sails中搭建环境 -&gt; 编码 -&gt; 得到结果<br>####3.1新建数据库和表<br>建好mysql数据库，然后新建表，新建表有两种新建方式，一种是自动建表，另外一种是手动建表。手动建表我就不多说了。<br>####3.2链接数据库<br>设计的主要文件是config里面的connections.js，里面存放的是链接数据库的配置，这里的配置不光只能配置这么一个链接，可以多个不同或相同数据库，代码如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mySqlServer: &#123;</span><br><span class="line">      adapter: &#39;sails-mysql&#39;,</span><br><span class="line">      host: &#39;localhost&#39;,</span><br><span class="line">      port: 3306,</span><br><span class="line">      user: &#39;root&#39;,</span><br><span class="line">      password: &#39;root&#39;,</span><br><span class="line">      database: &#39;myproject&#39;,</span><br><span class="line">      charset:&#39;utf8&#39;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>然后下一个重要文件就是models.js里面的文件，里面存放的是数据库使用的那个链接，以上面的名字作为键值，代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">connection: &#39;mySqlServer&#39;,</span><br><span class="line">  migrate: &#39;alter&#39;</span><br></pre></td></tr></table></figure>
+<p>connection ：表示我是用的就是mySqlServer这个链接<br>migrate：alter修改，这意味这对这个数据在运行项目时时会根据你实体的设计修改数据中的表结构的。而safe就是要手动建表，那么这个时候你得把实体与数据库对应起来之不过有点麻烦，对于初学者来说还是把实体与数据库手动对应起来吗，因为之后还会有复杂的表间关系，比如说一对一、一对多、多对多等。<br>####3.3建立数据模型<br>回到api层理的models里面，在里面新建好js文件,值得注意的是文件名称，这个名称直接关系到你之后的查询，删除等操作，我新建的operator的代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">module.exports &#x3D; &#123;</span><br><span class="line">  attributes:&#123;</span><br><span class="line">    username:&#123;</span><br><span class="line">      type:&#39;string&#39;,</span><br><span class="line">      required:true</span><br><span class="line">    &#125;,</span><br><span class="line">    password:&#123;</span><br><span class="line">      type:&#39;string&#39;,</span><br><span class="line">      required:true</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>除了这两个字段，sails会自动给你在表里面新建三个字段，id,createdAt,updatedAt,新建好数据的表结构如下图所示：<br><img src="http://i.imgur.com/7D14XIQ.png" alt="这里写图片描述"><br>####3.4测试数据链接<br>执行代码在项目路径下进入CMD命令窗口<br>node app.js或者sails lift，执行完之后如果没有报错且新建好数据库那么就没什么问题了。<br>那么在这个阶段容易碰到的问题有那些呢：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Consistency violation: A model (&#96;operator&#96;) references a datastore which cannot be found (&#96;otherSql&#96;).</span><br></pre></td></tr></table></figure>
+
+<p>这句话的意思是，operator这个数据模型在otherSql这个链接中找不到。所以遇到这个情况就检查是不是链接配的有问题或者Mysql的服务已关闭。<br>#####3.5controller的配置<br>controller配置里面的是交互的接口,代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">module.exports &#x3D; &#123;</span><br><span class="line">  findOne:function (req,res) &#123;</span><br><span class="line">    var id &#x3D; req.param(&#39;id&#39;);</span><br><span class="line">    if(id)&#123;</span><br><span class="line">      console.log(id);</span><br><span class="line">      operator.find(id, function operatorFound(err, entity) &#123;</span><br><span class="line">        res.send(entity,200);</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">      console.log(&quot;是啊比&quot;);</span><br><span class="line">      res.send(&quot;失败&quot;,500);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>一个简单的查询就这么完成了，写完成之后就是验证编写的正确性了。在浏览器输入url:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;localhost:1337&#x2F;user&#x2F;findOne?id&#x3D;1</span><br></pre></td></tr></table></figure>
+
+<p>查出来的结果如图所示：<br><img src="http://i.imgur.com/1h92KQK.png" alt=""><br>这条数据手动添加的，这样一个很简单的demo算完成了。</p>
+<p>###4补充</p>
+<p>如果想要修改项目访问端口，可在local.js里面添加：port:端口号，项目访问默认路径是user，想要修改的话，可以在route里面修改进行访问。<br>代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#39;&#x2F;findOne&#39;:&#123;</span><br><span class="line">    controller:&#39;UserController&#39;,</span><br><span class="line">    action:&#39;findOne&#39;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>起哄controller对应的就是controller的文件名（不添加后缀）,action:对应的就是里面的方法名。</p>
+<p><a href="http://sailsjs.com/" target="_blank" rel="noopener">sails官网</a></p>
+<p><a href="https://gruntjs.com/" target="_blank" rel="noopener">grunt官网</a></p>
+<p><a href="http://es6.ruanyifeng.com/#docs/module" target="_blank" rel="noopener">es6-阮一峰-模块</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://jackyumg.github.io/2020/04/07/Sails+MVC+Mysql+Node+%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%80/" data-id="ckcuez2lg0001q4vm15cz5r2g" class="article-share-link">分享</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-angularV4+学习笔记" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/04/07/angularV4+%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="article-date">
@@ -462,7 +650,7 @@ b {name:&apos;王五&apos;,age: 13}</code></pre><p>上述示例中，a , b为引
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a></li></ul>
     </div>
   </div>
 
@@ -475,6 +663,14 @@ b {name:&apos;王五&apos;,age: 13}</code></pre><p>上述示例中，a , b为引
       <ul>
         
           <li>
+            <a href="/2020/07/20/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F%E4%B8%8E%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F/">观察者模式与订阅模式</a>
+          </li>
+        
+          <li>
+            <a href="/2020/07/20/rxjs%E8%A7%82%E5%AF%9F%E8%80%85/">rxjs观察者</a>
+          </li>
+        
+          <li>
             <a href="/2020/04/16/rxjs%E6%93%8D%E4%BD%9C%E7%AC%A6%E8%AF%B4%E6%98%8E/">rxjs操作符说明</a>
           </li>
         
@@ -484,14 +680,6 @@ b {name:&apos;王五&apos;,age: 13}</code></pre><p>上述示例中，a , b为引
         
           <li>
             <a href="/2020/04/07/%E9%9B%86%E5%90%88%E4%B8%8E%E5%AD%97%E5%85%B8/">集合与字典</a>
-          </li>
-        
-          <li>
-            <a href="/2020/04/07/%E7%94%A8JPlag%E5%9C%A8%E4%B8%80%E7%BB%84%E7%A8%8B%E5%BA%8F%E4%B8%AD%E5%AF%BB%E6%89%BE%E6%8A%84%E8%A2%AD%E8%A1%8C%E4%B8%BA%EF%BC%88%E7%BF%BB%E8%AF%91%EF%BC%89/">用JPlag在一组程序中寻找抄袭行为（翻译）</a>
-          </li>
-        
-          <li>
-            <a href="/2020/04/07/%E6%AF%8F%E5%A4%A9%E5%9D%9A%E6%8C%81%E4%B8%80%E4%B8%AACSS-%E6%BB%9A%E5%8A%A8%E6%96%87%E5%AD%97/">每天坚持一个CSS-滚动文字</a>
           </li>
         
       </ul>

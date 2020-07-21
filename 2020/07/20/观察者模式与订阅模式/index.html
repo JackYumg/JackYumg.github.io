@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>观察者模式与订阅模式 | JackYumg的学习空间</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="观察者模式与发布订阅模式观察者模式模式类型：行为型模式 应用场景：当一个对象被修改时，则会自动通知依赖他的对象（概念太抽象）。 对象间关系：  观察者(n) - 被观察者(1) 应用实例在A校有一个学生仪表监控系统，而监控到学生A穿拖鞋上学系统就会报警发出警告 说明观察者会受被观察对象刺激，然后做出反应。比如说猫与老鼠洞，当猫探查老鼠洞时发现了里面的老鼠时(被老鼠刺激)，猫会叫并捉老鼠，当探查老鼠">
+<meta property="og:type" content="article">
+<meta property="og:title" content="观察者模式与订阅模式">
+<meta property="og:url" content="https://jackyumg.github.io/2020/07/20/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F%E4%B8%8E%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F/index.html">
+<meta property="og:site_name" content="JackYumg的学习空间">
+<meta property="og:description" content="观察者模式与发布订阅模式观察者模式模式类型：行为型模式 应用场景：当一个对象被修改时，则会自动通知依赖他的对象（概念太抽象）。 对象间关系：  观察者(n) - 被观察者(1) 应用实例在A校有一个学生仪表监控系统，而监控到学生A穿拖鞋上学系统就会报警发出警告 说明观察者会受被观察对象刺激，然后做出反应。比如说猫与老鼠洞，当猫探查老鼠洞时发现了里面的老鼠时(被老鼠刺激)，猫会叫并捉老鼠，当探查老鼠">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-07-20T11:40:43.603Z">
+<meta property="article:modified_time" content="2020-07-20T12:24:32.237Z">
+<meta property="article:author" content="JackYumg">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="JackYumg的学习空间" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">JackYumg的学习空间</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">主页</a>
+        
+          <a class="main-nav-link" href="/archives">文章列表</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://jackyumg.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-观察者模式与订阅模式" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/07/20/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F%E4%B8%8E%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F/" class="article-date">
+  <time datetime="2020-07-20T11:40:43.603Z" itemprop="datePublished">2020-07-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      观察者模式与订阅模式
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="观察者模式与发布订阅模式"><a href="#观察者模式与发布订阅模式" class="headerlink" title="观察者模式与发布订阅模式"></a>观察者模式与发布订阅模式</h2><h3 id="观察者模式"><a href="#观察者模式" class="headerlink" title="观察者模式"></a>观察者模式</h3><p><code>模式类型</code>：行为型模式</p>
+<p><code>应用场景</code>：当一个对象被修改时，则会自动通知依赖他的对象（概念太抽象）。</p>
+<p><code>对象间关系</code>：  观察者(n) - 被观察者(1)</p>
+<h4 id="应用实例"><a href="#应用实例" class="headerlink" title="应用实例"></a>应用实例</h4><p>在A校有一个学生仪表监控系统，而监控到学生A穿拖鞋上学系统就会报警发出警告</p>
+<h4 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h4><p>观察者会受被观察对象刺激，然后做出反应。比如说猫与老鼠洞，当猫探查老鼠洞时发现了里面的老鼠时(被老鼠刺激)，猫会叫并捉老鼠，当探查老鼠洞无老鼠时，猫也会走开，便无观察者与被观察者。</p>
+<p>另外观察者别名为订阅与发布，例如，在微博关注了王一博，他发消息我都能收到。</p>
+<h3 id="发布与订阅模式"><a href="#发布与订阅模式" class="headerlink" title="发布与订阅模式"></a>发布与订阅模式</h3><p><code>模式类型</code>：行为型模式</p>
+<p><code>应用场景</code>：首先发布者需要发布话题，发布完成后，话题被订阅订阅者们定义，然后，关于该话题内容的修改会通过消息发给订阅者，无订阅者时，就不会随意发送消息。</p>
+<p><code>对象间关系</code>：发布者 (1) - 话题(n)  话题(1) - 订阅者(0-n)</p>
+<h4 id="应用实例-1"><a href="#应用实例-1" class="headerlink" title="应用实例"></a>应用实例</h4><p>在A论坛上，B同学发布了一个C话题，然后D同学对该话题感兴趣想知道更多，于是点了关注。在后面的日子里，B同学在C话题里面发布了一个问题，而D同学在论坛消息里面收到了C话题通知的消息。</p>
+<h4 id="现实简单例子"><a href="#现实简单例子" class="headerlink" title="现实简单例子"></a>现实简单例子</h4><p>微信公众号、QQ空间、知乎问答、掘金问答、Segmentfault回答问题的消息等等</p>
+<h4 id="说明-1"><a href="#说明-1" class="headerlink" title="说明"></a>说明</h4>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://jackyumg.github.io/2020/07/20/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F%E4%B8%8E%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F/" data-id="ckcv8qwpl000054vme38ocxyr" class="article-share-link">分享</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2020/07/20/rxjs%E8%A7%82%E5%AF%9F%E8%80%85/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">rxjs观察者</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/07/20/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F%E4%B8%8E%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F/">观察者模式与订阅模式</a>
+          </li>
+        
+          <li>
+            <a href="/2020/07/20/rxjs%E8%A7%82%E5%AF%9F%E8%80%85/">rxjs观察者</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/16/rxjs%E6%93%8D%E4%BD%9C%E7%AC%A6%E8%AF%B4%E6%98%8E/">rxjs操作符说明</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/15/css%E5%8A%A8%E7%94%BB/">css动画</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/07/%E9%9B%86%E5%90%88%E4%B8%8E%E5%AD%97%E5%85%B8/">集合与字典</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 JackYumg<br>
+      授权 <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
