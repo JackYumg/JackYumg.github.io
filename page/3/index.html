@@ -64,6 +64,120 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-less学习之Bootstrap（按钮篇）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/04/07/less%E5%AD%A6%E4%B9%A0%E4%B9%8BBootstrap%EF%BC%88%E6%8C%89%E9%92%AE%E7%AF%87%EF%BC%89/" class="article-date">
+  <time datetime="2020-04-07T06:11:35.174Z" itemprop="datePublished">2020-04-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/07/less%E5%AD%A6%E4%B9%A0%E4%B9%8BBootstrap%EF%BC%88%E6%8C%89%E9%92%AE%E7%AF%87%EF%BC%89/">less学习之Bootstrap（按钮篇）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="less学习之Bootstrap按钮篇）"><a href="#less学习之Bootstrap按钮篇）" class="headerlink" title="less学习之Bootstrap按钮篇）"></a>less学习之<code>Bootstrap</code>按钮篇）</h1><p>如我上一篇<a href="https://segmentfault.com/a/1190000017904706" target="_blank" rel="noopener">less学习之Bootstrap</a>里面，介绍了Bootstrap的目录结构，说明了在<code>variables.less</code>这个文件里面，定义了主题色，也包括了按钮的主题色。接下来看一看 <code>buttons.less</code>与 <code>mixins/buttons.less</code>.</p>
+<h2 id="文件-buttons-less-与-mixins-buttons-less"><a href="#文件-buttons-less-与-mixins-buttons-less" class="headerlink" title="文件 buttons.less 与 mixins/buttons.less"></a>文件 <code>buttons.less</code> 与 <code>mixins/buttons.less</code></h2><p>内容不是很多，总结下来就是：</p>
+<p>1、“<code>.btn</code>”的基础样式定义。</p>
+<p>2、按钮的各种状态含义的样式定义，例如：btn-primary、btn-success等。</p>
+<p>3、伪连接，按钮的样式显示为连接的样式。</p>
+<p>4、按钮尺寸的class：lg、sm、xs。</p>
+<p>5、input类型的按钮定义。</p>
+<h3 id="基础样式定义"><a href="#基础样式定义" class="headerlink" title="基础样式定义"></a>基础样式定义</h3><h4 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h4><pre><code>.btn {
+  display: inline-block;
+  ...
+  ...
+
+  &amp;,
+  &amp;:active,
+  &amp;.active {
+    &amp;:focus,
+    &amp;.focus {
+      .tab-focus();
+    }
+  }
+
+ ...
+ ...// 余下的为hover、disabled时的样式
+}</code></pre><h4 id="说明："><a href="#说明：" class="headerlink" title="说明："></a>说明：</h4><pre><code>知识点1：`&amp;`在less与scss的语法中，表示同父级，就上一个例子来说，就是编译之后`&amp;`将会被`.btn`替换，如果是多层时也是相同的道理。
+
+提示1：运用了函数tab-focus。此函数定义在mixins/tab-focus.less中，代码很短
+
+.tab-focus() {
+  outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -2px;
+}
+
+修改浏览器默认的大纲样式：表现在按钮、form表单等原生组件上。
+
+提示2：    运用了函数user-select。此函数定义在mixins/vendor-prefixes中。
+
+.user-select(@select) {
+  -webkit-user-select: @select;
+ -moz-user-select: @select;
+  -ms-user-select: @select; // IE10+
+      user-select: @select;
+}
+
+作用，让文本是否能够选择。
+
+提示3： 运用了函数opacity。此函数定义在mixins/opacity中。
+
+.opacity(@opacity) {
+  opacity: @opacity;
+  @opacity-ie: (@opacity * 100);
+  filter: ~&quot;alpha(opacity=@{opacity-ie})&quot;;
+}
+
+此处做了IE的兼容IE，IE的透明度采用 filtger:alpha(opacity=value),其中 0 &lt;= value &amp;&amp; value &lt;= 100.
+符号“~”，可以意为JavaScript里面的 evel ，可以将字符串转化为表达式。所以说一些复杂的选择器也能够作为变量定义。</code></pre><h4 id="特别说明"><a href="#特别说明" class="headerlink" title="特别说明"></a>特别说明</h4><h5 id="函数button-variant"><a href="#函数button-variant" class="headerlink" title="函数button-variant"></a>函数<code>button-variant</code></h5><pre><code>Bootstrap里面抽象出来的函数，作用于按钮不同状态下的颜色变化。例如：hover、focus、active等状态。</code></pre><p>函数说明</p>
+<pre><code>参数：@color; @background; @border // 分别时字体颜色、背景颜色、边框颜色</code></pre><p>结构如下：</p>
+<pre><code>.button-variant(@color; @background; @border) {
+  color: @color;
+  background-color: @background;
+  border-color: @border;
+
+  &amp;:focus,
+  &amp;.focus {
+    color: @color;
+    background-color: darken(@background, 10%);
+        border-color: darken(@border, 25%);
+  }
+
+ ...
+ ...// 余下的为hover、disabled时的样式
+
+  .badge {
+    color: @background;
+    background-color: @color;
+  }
+}</code></pre><p>由上面两个文件可以总结出的结论是：<em>.less里面写的是选择器定义、变量定义，而mixins/</em>.less里面写的是函数。</p>
+<h3 id="本篇总结"><a href="#本篇总结" class="headerlink" title="本篇总结"></a>本篇总结</h3><p>关于Bootstrap听到过不少的见闻，有好有坏，我有身边也有人说这个框架很垃圾。但是对于Bootstrap这个框架怎么样，我不做评价，但是Bootstrap用来作为学习的资料时非常合适的，Less的语法糖都了知道，那么如何才能让Less用起来得心应手？无疑，源码是一种途径。</p>
+<p>接下来的安排，自己写的文章自己也会去实现它，另外关于Less的学习也不会停止。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://jackyumg.github.io/2020/04/07/less%E5%AD%A6%E4%B9%A0%E4%B9%8BBootstrap%EF%BC%88%E6%8C%89%E9%92%AE%E7%AF%87%EF%BC%89/" data-id="ckg3cfnt8000cbovm9368axni" class="article-share-link">分享</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-gitFlow工作流-翻译" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/04/07/gitFlow%E5%B7%A5%E4%BD%9C%E6%B5%81-%E7%BF%BB%E8%AF%91/" class="article-date">
@@ -167,7 +281,7 @@ git branch -D hotfix_branch</code></pre><p><a href="https://www.atlassian.com/gi
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://jackyumg.github.io/2020/04/07/gitFlow%E5%B7%A5%E4%BD%9C%E6%B5%81-%E7%BF%BB%E8%AF%91/" data-id="ckcv8s0260003f8vm6t7z41ga" class="article-share-link">分享</a>
+      <a data-url="https://jackyumg.github.io/2020/04/07/gitFlow%E5%B7%A5%E4%BD%9C%E6%B5%81-%E7%BF%BB%E8%AF%91/" data-id="ckg3cfnsz0004bovm2jbgfsi3" class="article-share-link">分享</a>
       
       
     </footer>
@@ -177,9 +291,9 @@ git branch -D hotfix_branch</code></pre><p><a href="https://www.atlassian.com/gi
 
 
   
-    <article id="post-Sails+MVC+Mysql+Node+学习笔记一" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-css的三大特性" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2020/04/07/Sails+MVC+Mysql+Node+%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%80/" class="article-date">
+    <a href="/2020/04/07/css%E7%9A%84%E4%B8%89%E5%A4%A7%E7%89%B9%E6%80%A7/" class="article-date">
   <time datetime="2020-04-07T06:11:35.172Z" itemprop="datePublished">2020-04-07</time>
 </a>
     
@@ -191,7 +305,7 @@ git branch -D hotfix_branch</code></pre><p><a href="https://www.atlassian.com/gi
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/07/Sails+MVC+Mysql+Node+%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%80/">Sails+MVC+Mysql+Node+学习笔记一</a>
+      <a class="article-title" href="/2020/04/07/css%E7%9A%84%E4%B8%89%E5%A4%A7%E7%89%B9%E6%80%A7/">css的三大特性</a>
     </h1>
   
 
@@ -199,50 +313,63 @@ git branch -D hotfix_branch</code></pre><p><a href="https://www.atlassian.com/gi
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="http://sailsjs.com/images/hero_squid.png" alt="这里写图片描述"><br>##项目构建<br>安装Node就不多说了，<br>###1.sails安装与项目新建运行</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">npm install sails -g&#x2F;&#x2F;全局安装</span><br><span class="line"></span><br><span class="line">sails new project-name&#x2F;&#x2F;新建项目</span><br><span class="line"></span><br><span class="line">cd project-name &#x2F;&#x2F;进入刚才新建项目的目录</span><br><span class="line"></span><br><span class="line">sails lift &#x2F;&#x2F;运行项目，运行原理也是直接在项目目录路径下使用node app.js</span><br><span class="line">npm install sails-mysql --save &#x2F;&#x2F;--save 把安装的模块写进package.json</span><br></pre></td></tr></table></figure>
-<p>到了这一步，环境算是搭建完成。<br>###2.目录结构介绍</p>
-<p><img src="http://img.blog.csdn.net/20170827195403601?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcGVyc29uRmVhdA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<p>####2.1api<br>在api目录下，有着controller、hooks、models、policies、responses和services几个目录</p>
+        <h2 id="css基础复习"><a href="#css基础复习" class="headerlink" title="css基础复习"></a>css基础复习</h2><h3 id="css的三大特性"><a href="#css的三大特性" class="headerlink" title="css的三大特性"></a>css的三大特性</h3><h4 id="1、继承性"><a href="#1、继承性" class="headerlink" title="1、继承性"></a>1、继承性</h4><p>css中的继承性，与其他语言的继承性相比是有区别的，</p>
 <ol>
-<li>controller目录下存放的就是页面与后台服务器通讯的接口，如果对应的java，那么就是java里面的Action层或者使用Spring<br>MVC ，那么也是对应的Controller，里面存放的就是接口。</li>
-<li>models,数据模型层，也就是实体层，对应java里面的entity。</li>
-<li>policies(策略),在controller之前执行，主要工作是session认证，如果session是认证通过了，那么就可以进入下一个策略或者如果是最后一个策略，那么就可以进入controller了，个人感觉像是java里的过滤器或者分发器。</li>
-<li>responses,自定义的响应。举个例子，一般从前台发出一个请求后，如果经过了服务器，那么都会给客户端返回一个结果，除了本身自带的响应方式，也可以采用自定义的响应，比如返回一个404页面，返回500页面或者返回字符串等等。</li>
-<li>services,业务逻辑处理层，采用es6的Module的语法编写。<br>####2.2assets静态资源层<br>在这层目录里面有，js，image，styles,templates，这个目录里面主要放的就是静态资源，没什么说的。<br>####2.3config配置层<br>这层里面有env和locales两层，然后和一些js。</li>
+<li>部分属性继承。</li>
+<li>多级子代继承。</li>
 </ol>
-<p>env中有一个development.js里面的注释是如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">开发环境配置，这个文件夹里面包含了开发团队共享的一些配置，比如api的名称，数据库的密码，如果你在你的Sails应用中使用了版本控制器，这个文件也会提交到你的资源仓库里面，除非你在gitignore中添加了一个信息，表明这个文件是私有的或不公开的。</span><br></pre></td></tr></table></figure>
+<pre><code>- 可继承属性：字体，文本等属性，颜色、font-开头、text-开头、line-开头的、white-space。
+- 不可继承属性：边框、外边距、内边距、背景、定位、高度、浮动
 
-<p>env中的production.js里的注释如下：<br>项目环境配置，与development类似，但是从注释中看到要多一些东西，比如配置端口的和日志的</p>
-<p>####2.4task任务层<br>这层里面主要放置的是grunt的任务，<br>####2.5views层<br>这一层主要放置的是作为展示的前台页面，一种情况是使用node做单纯的后台服务器，不处理前台业务，而另外一种情况是采用模块化的思想，对结构进行分层，达到MVC的合理实现，本来Sails就是一个MVC框架所以第一种情况还是不太会出现。<br>###3开始搭建项目<br>整体流程：新建数据库 -&gt; 新建表 -&gt; 建实体 -&gt; 在sails中搭建环境 -&gt; 编码 -&gt; 得到结果<br>####3.1新建数据库和表<br>建好mysql数据库，然后新建表，新建表有两种新建方式，一种是自动建表，另外一种是手动建表。手动建表我就不多说了。<br>####3.2链接数据库<br>设计的主要文件是config里面的connections.js，里面存放的是链接数据库的配置，这里的配置不光只能配置这么一个链接，可以多个不同或相同数据库，代码如下:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mySqlServer: &#123;</span><br><span class="line">      adapter: &#39;sails-mysql&#39;,</span><br><span class="line">      host: &#39;localhost&#39;,</span><br><span class="line">      port: 3306,</span><br><span class="line">      user: &#39;root&#39;,</span><br><span class="line">      password: &#39;root&#39;,</span><br><span class="line">      database: &#39;myproject&#39;,</span><br><span class="line">      charset:&#39;utf8&#39;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>然后下一个重要文件就是models.js里面的文件，里面存放的是数据库使用的那个链接，以上面的名字作为键值，代码如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">connection: &#39;mySqlServer&#39;,</span><br><span class="line">  migrate: &#39;alter&#39;</span><br></pre></td></tr></table></figure>
-<p>connection ：表示我是用的就是mySqlServer这个链接<br>migrate：alter修改，这意味这对这个数据在运行项目时时会根据你实体的设计修改数据中的表结构的。而safe就是要手动建表，那么这个时候你得把实体与数据库对应起来之不过有点麻烦，对于初学者来说还是把实体与数据库手动对应起来吗，因为之后还会有复杂的表间关系，比如说一对一、一对多、多对多等。<br>####3.3建立数据模型<br>回到api层理的models里面，在里面新建好js文件,值得注意的是文件名称，这个名称直接关系到你之后的查询，删除等操作，我新建的operator的代码如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">module.exports &#x3D; &#123;</span><br><span class="line">  attributes:&#123;</span><br><span class="line">    username:&#123;</span><br><span class="line">      type:&#39;string&#39;,</span><br><span class="line">      required:true</span><br><span class="line">    &#125;,</span><br><span class="line">    password:&#123;</span><br><span class="line">      type:&#39;string&#39;,</span><br><span class="line">      required:true</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>除了这两个字段，sails会自动给你在表里面新建三个字段，id,createdAt,updatedAt,新建好数据的表结构如下图所示：<br><img src="http://i.imgur.com/7D14XIQ.png" alt="这里写图片描述"><br>####3.4测试数据链接<br>执行代码在项目路径下进入CMD命令窗口<br>node app.js或者sails lift，执行完之后如果没有报错且新建好数据库那么就没什么问题了。<br>那么在这个阶段容易碰到的问题有那些呢：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Consistency violation: A model (&#96;operator&#96;) references a datastore which cannot be found (&#96;otherSql&#96;).</span><br></pre></td></tr></table></figure>
+`注意：不容易找出其属性的来源，因此在开发时需要找父级元素，从而找出样式来源，并得到解决方案`</code></pre><h4 id="2、优先级"><a href="#2、优先级" class="headerlink" title="2、优先级"></a>2、优先级</h4><p>css中的优先级，在面对两个样式作用于同一元素，同一个属性，不同值时，浏览器的选择标准是基于css权重做判断的，浏览器按照css的规则得出css的权重从而得出样式的优先级，优先展示权重高的样式。</p>
+<h5 id="css权重计算规则"><a href="#css权重计算规则" class="headerlink" title="css权重计算规则"></a>css权重计算规则</h5><h6 id="权重参考表"><a href="#权重参考表" class="headerlink" title="权重参考表"></a>权重参考表</h6><table>
+    <thead>
+          <tr>
+            <th>元素</th>
+            <th>贡献值</th>
+          </tr>
+    </thead>
+  <tr>
+    <td>继承、*</td>
+    <td>0，0，0，0</td>
+  </tr>
+  <tr>
+    <td>标签</td>
+    <td>0，0，0，1</td>
+  </tr>
+  <tr>
+    <td>类、伪类</td>
+    <td>0，0，1，0</td>
+  </tr>
+ <tr>
+    <td>ID</td>
+    <td>0，1，0，0</td>
+  </tr>
+ <tr>
+    <td>行内样式</td>
+    <td>1，0，0，0</td>
+  </tr>
+ <tr>
+    <td>!important</td>
+    <td>无穷大</td>
+  </tr>
+ <tr>
+    <td>max-height、max-width覆盖width、height</td>
+    <td>大于无穷大</td>
+  </tr>
+ <tr>
+    <td>min-height、max-width</td>
+    <td>大于max-height、max-width</td>
+  </tr>
+</table>
 
-<p>这句话的意思是，operator这个数据模型在otherSql这个链接中找不到。所以遇到这个情况就检查是不是链接配的有问题或者Mysql的服务已关闭。<br>#####3.5controller的配置<br>controller配置里面的是交互的接口,代码如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">module.exports &#x3D; &#123;</span><br><span class="line">  findOne:function (req,res) &#123;</span><br><span class="line">    var id &#x3D; req.param(&#39;id&#39;);</span><br><span class="line">    if(id)&#123;</span><br><span class="line">      console.log(id);</span><br><span class="line">      operator.find(id, function operatorFound(err, entity) &#123;</span><br><span class="line">        res.send(entity,200);</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">      console.log(&quot;是啊比&quot;);</span><br><span class="line">      res.send(&quot;失败&quot;,500);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>一个简单的查询就这么完成了，写完成之后就是验证编写的正确性了。在浏览器输入url:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;localhost:1337&#x2F;user&#x2F;findOne?id&#x3D;1</span><br></pre></td></tr></table></figure>
-
-<p>查出来的结果如图所示：<br><img src="http://i.imgur.com/1h92KQK.png" alt=""><br>这条数据手动添加的，这样一个很简单的demo算完成了。</p>
-<p>###4补充</p>
-<p>如果想要修改项目访问端口，可在local.js里面添加：port:端口号，项目访问默认路径是user，想要修改的话，可以在route里面修改进行访问。<br>代码如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#39;&#x2F;findOne&#39;:&#123;</span><br><span class="line">    controller:&#39;UserController&#39;,</span><br><span class="line">    action:&#39;findOne&#39;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-<p>起哄controller对应的就是controller的文件名（不添加后缀）,action:对应的就是里面的方法名。</p>
-<p><a href="http://sailsjs.com/" target="_blank" rel="noopener">sails官网</a></p>
-<p><a href="https://gruntjs.com/" target="_blank" rel="noopener">grunt官网</a></p>
-<p><a href="http://es6.ruanyifeng.com/#docs/module" target="_blank" rel="noopener">es6-阮一峰-模块</a></p>
+<h6 id="计算规则"><a href="#计算规则" class="headerlink" title="计算规则"></a>计算规则</h6><p>1、按照贡献值累加，同位相加不会超过10就进位。<br>2、权重不会被子元素继承，可以理解为继承的只能是属性，权重是人为制定的规则，如1所示。<br>3、min-height/min-width &gt; max-height/max-width &gt; !important &gt; 行内样式 &gt; ID选择器 &gt; 类选择器、属性选择器、伪元素和伪类选择器 &gt; 元素选择器 &gt; 通用选择器</p>
+<h4 id="3、特殊性-层叠性"><a href="#3、特殊性-层叠性" class="headerlink" title="3、特殊性/层叠性"></a>3、特殊性/层叠性</h4><p>可覆盖，当两个作用于同一元素的样式权重一样大时，按照css加载顺序进行渲染，原因与html渲染机制相关。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://jackyumg.github.io/2020/04/07/Sails+MVC+Mysql+Node+%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%80/" data-id="ckcv8s0220001f8vm1phrgwdv" class="article-share-link">分享</a>
+      <a data-url="https://jackyumg.github.io/2020/04/07/css%E7%9A%84%E4%B8%89%E5%A4%A7%E7%89%B9%E6%80%A7/" data-id="ckg3cfnsu0001bovm8e5u5px9" class="article-share-link">分享</a>
       
       
     </footer>
@@ -411,7 +538,7 @@ export class AppModule { }</code></pre><p>关于@component的元数据还未完�
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://jackyumg.github.io/2020/04/07/angularV4+%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" data-id="ckcv8s0240002f8vmf20kaq57" class="article-share-link">分享</a>
+      <a data-url="https://jackyumg.github.io/2020/04/07/angularV4+%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" data-id="ckg3cfnsx0002bovm09v4gyws" class="article-share-link">分享</a>
       
       
     </footer>
@@ -421,9 +548,9 @@ export class AppModule { }</code></pre><p>关于@component的元数据还未完�
 
 
   
-    <article id="post-css的三大特性" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Sails+MVC+Mysql+Node+学习笔记一" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2020/04/07/css%E7%9A%84%E4%B8%89%E5%A4%A7%E7%89%B9%E6%80%A7/" class="article-date">
+    <a href="/2020/04/07/Sails+MVC+Mysql+Node+%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%80/" class="article-date">
   <time datetime="2020-04-07T06:11:35.172Z" itemprop="datePublished">2020-04-07</time>
 </a>
     
@@ -435,7 +562,7 @@ export class AppModule { }</code></pre><p>关于@component的元数据还未完�
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/07/css%E7%9A%84%E4%B8%89%E5%A4%A7%E7%89%B9%E6%80%A7/">css的三大特性</a>
+      <a class="article-title" href="/2020/04/07/Sails+MVC+Mysql+Node+%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%80/">Sails+MVC+Mysql+Node+学习笔记一</a>
     </h1>
   
 
@@ -443,181 +570,50 @@ export class AppModule { }</code></pre><p>关于@component的元数据还未完�
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="css基础复习"><a href="#css基础复习" class="headerlink" title="css基础复习"></a>css基础复习</h2><h3 id="css的三大特性"><a href="#css的三大特性" class="headerlink" title="css的三大特性"></a>css的三大特性</h3><h4 id="1、继承性"><a href="#1、继承性" class="headerlink" title="1、继承性"></a>1、继承性</h4><p>css中的继承性，与其他语言的继承性相比是有区别的，</p>
+        <p><img src="http://sailsjs.com/images/hero_squid.png" alt="这里写图片描述"><br>##项目构建<br>安装Node就不多说了，<br>###1.sails安装与项目新建运行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">npm install sails -g&#x2F;&#x2F;全局安装</span><br><span class="line"></span><br><span class="line">sails new project-name&#x2F;&#x2F;新建项目</span><br><span class="line"></span><br><span class="line">cd project-name &#x2F;&#x2F;进入刚才新建项目的目录</span><br><span class="line"></span><br><span class="line">sails lift &#x2F;&#x2F;运行项目，运行原理也是直接在项目目录路径下使用node app.js</span><br><span class="line">npm install sails-mysql --save &#x2F;&#x2F;--save 把安装的模块写进package.json</span><br></pre></td></tr></table></figure>
+<p>到了这一步，环境算是搭建完成。<br>###2.目录结构介绍</p>
+<p><img src="http://img.blog.csdn.net/20170827195403601?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcGVyc29uRmVhdA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>####2.1api<br>在api目录下，有着controller、hooks、models、policies、responses和services几个目录</p>
 <ol>
-<li>部分属性继承。</li>
-<li>多级子代继承。</li>
+<li>controller目录下存放的就是页面与后台服务器通讯的接口，如果对应的java，那么就是java里面的Action层或者使用Spring<br>MVC ，那么也是对应的Controller，里面存放的就是接口。</li>
+<li>models,数据模型层，也就是实体层，对应java里面的entity。</li>
+<li>policies(策略),在controller之前执行，主要工作是session认证，如果session是认证通过了，那么就可以进入下一个策略或者如果是最后一个策略，那么就可以进入controller了，个人感觉像是java里的过滤器或者分发器。</li>
+<li>responses,自定义的响应。举个例子，一般从前台发出一个请求后，如果经过了服务器，那么都会给客户端返回一个结果，除了本身自带的响应方式，也可以采用自定义的响应，比如返回一个404页面，返回500页面或者返回字符串等等。</li>
+<li>services,业务逻辑处理层，采用es6的Module的语法编写。<br>####2.2assets静态资源层<br>在这层目录里面有，js，image，styles,templates，这个目录里面主要放的就是静态资源，没什么说的。<br>####2.3config配置层<br>这层里面有env和locales两层，然后和一些js。</li>
 </ol>
-<pre><code>- 可继承属性：字体，文本等属性，颜色、font-开头、text-开头、line-开头的、white-space。
-- 不可继承属性：边框、外边距、内边距、背景、定位、高度、浮动
+<p>env中有一个development.js里面的注释是如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">开发环境配置，这个文件夹里面包含了开发团队共享的一些配置，比如api的名称，数据库的密码，如果你在你的Sails应用中使用了版本控制器，这个文件也会提交到你的资源仓库里面，除非你在gitignore中添加了一个信息，表明这个文件是私有的或不公开的。</span><br></pre></td></tr></table></figure>
 
-`注意：不容易找出其属性的来源，因此在开发时需要找父级元素，从而找出样式来源，并得到解决方案`</code></pre><h4 id="2、优先级"><a href="#2、优先级" class="headerlink" title="2、优先级"></a>2、优先级</h4><p>css中的优先级，在面对两个样式作用于同一元素，同一个属性，不同值时，浏览器的选择标准是基于css权重做判断的，浏览器按照css的规则得出css的权重从而得出样式的优先级，优先展示权重高的样式。</p>
-<h5 id="css权重计算规则"><a href="#css权重计算规则" class="headerlink" title="css权重计算规则"></a>css权重计算规则</h5><h6 id="权重参考表"><a href="#权重参考表" class="headerlink" title="权重参考表"></a>权重参考表</h6><table>
-    <thead>
-          <tr>
-            <th>元素</th>
-            <th>贡献值</th>
-          </tr>
-    </thead>
-  <tr>
-    <td>继承、*</td>
-    <td>0，0，0，0</td>
-  </tr>
-  <tr>
-    <td>标签</td>
-    <td>0，0，0，1</td>
-  </tr>
-  <tr>
-    <td>类、伪类</td>
-    <td>0，0，1，0</td>
-  </tr>
- <tr>
-    <td>ID</td>
-    <td>0，1，0，0</td>
-  </tr>
- <tr>
-    <td>行内样式</td>
-    <td>1，0，0，0</td>
-  </tr>
- <tr>
-    <td>!important</td>
-    <td>无穷大</td>
-  </tr>
- <tr>
-    <td>max-height、max-width覆盖width、height</td>
-    <td>大于无穷大</td>
-  </tr>
- <tr>
-    <td>min-height、max-width</td>
-    <td>大于max-height、max-width</td>
-  </tr>
-</table>
+<p>env中的production.js里的注释如下：<br>项目环境配置，与development类似，但是从注释中看到要多一些东西，比如配置端口的和日志的</p>
+<p>####2.4task任务层<br>这层里面主要放置的是grunt的任务，<br>####2.5views层<br>这一层主要放置的是作为展示的前台页面，一种情况是使用node做单纯的后台服务器，不处理前台业务，而另外一种情况是采用模块化的思想，对结构进行分层，达到MVC的合理实现，本来Sails就是一个MVC框架所以第一种情况还是不太会出现。<br>###3开始搭建项目<br>整体流程：新建数据库 -&gt; 新建表 -&gt; 建实体 -&gt; 在sails中搭建环境 -&gt; 编码 -&gt; 得到结果<br>####3.1新建数据库和表<br>建好mysql数据库，然后新建表，新建表有两种新建方式，一种是自动建表，另外一种是手动建表。手动建表我就不多说了。<br>####3.2链接数据库<br>设计的主要文件是config里面的connections.js，里面存放的是链接数据库的配置，这里的配置不光只能配置这么一个链接，可以多个不同或相同数据库，代码如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mySqlServer: &#123;</span><br><span class="line">      adapter: &#39;sails-mysql&#39;,</span><br><span class="line">      host: &#39;localhost&#39;,</span><br><span class="line">      port: 3306,</span><br><span class="line">      user: &#39;root&#39;,</span><br><span class="line">      password: &#39;root&#39;,</span><br><span class="line">      database: &#39;myproject&#39;,</span><br><span class="line">      charset:&#39;utf8&#39;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>然后下一个重要文件就是models.js里面的文件，里面存放的是数据库使用的那个链接，以上面的名字作为键值，代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">connection: &#39;mySqlServer&#39;,</span><br><span class="line">  migrate: &#39;alter&#39;</span><br></pre></td></tr></table></figure>
+<p>connection ：表示我是用的就是mySqlServer这个链接<br>migrate：alter修改，这意味这对这个数据在运行项目时时会根据你实体的设计修改数据中的表结构的。而safe就是要手动建表，那么这个时候你得把实体与数据库对应起来之不过有点麻烦，对于初学者来说还是把实体与数据库手动对应起来吗，因为之后还会有复杂的表间关系，比如说一对一、一对多、多对多等。<br>####3.3建立数据模型<br>回到api层理的models里面，在里面新建好js文件,值得注意的是文件名称，这个名称直接关系到你之后的查询，删除等操作，我新建的operator的代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">module.exports &#x3D; &#123;</span><br><span class="line">  attributes:&#123;</span><br><span class="line">    username:&#123;</span><br><span class="line">      type:&#39;string&#39;,</span><br><span class="line">      required:true</span><br><span class="line">    &#125;,</span><br><span class="line">    password:&#123;</span><br><span class="line">      type:&#39;string&#39;,</span><br><span class="line">      required:true</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>除了这两个字段，sails会自动给你在表里面新建三个字段，id,createdAt,updatedAt,新建好数据的表结构如下图所示：<br><img src="http://i.imgur.com/7D14XIQ.png" alt="这里写图片描述"><br>####3.4测试数据链接<br>执行代码在项目路径下进入CMD命令窗口<br>node app.js或者sails lift，执行完之后如果没有报错且新建好数据库那么就没什么问题了。<br>那么在这个阶段容易碰到的问题有那些呢：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Consistency violation: A model (&#96;operator&#96;) references a datastore which cannot be found (&#96;otherSql&#96;).</span><br></pre></td></tr></table></figure>
 
-<h6 id="计算规则"><a href="#计算规则" class="headerlink" title="计算规则"></a>计算规则</h6><p>1、按照贡献值累加，同位相加不会超过10就进位。<br>2、权重不会被子元素继承，可以理解为继承的只能是属性，权重是人为制定的规则，如1所示。<br>3、min-height/min-width &gt; max-height/max-width &gt; !important &gt; 行内样式 &gt; ID选择器 &gt; 类选择器、属性选择器、伪元素和伪类选择器 &gt; 元素选择器 &gt; 通用选择器</p>
-<h4 id="3、特殊性-层叠性"><a href="#3、特殊性-层叠性" class="headerlink" title="3、特殊性/层叠性"></a>3、特殊性/层叠性</h4><p>可覆盖，当两个作用于同一元素的样式权重一样大时，按照css加载顺序进行渲染，原因与html渲染机制相关。</p>
+<p>这句话的意思是，operator这个数据模型在otherSql这个链接中找不到。所以遇到这个情况就检查是不是链接配的有问题或者Mysql的服务已关闭。<br>#####3.5controller的配置<br>controller配置里面的是交互的接口,代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">module.exports &#x3D; &#123;</span><br><span class="line">  findOne:function (req,res) &#123;</span><br><span class="line">    var id &#x3D; req.param(&#39;id&#39;);</span><br><span class="line">    if(id)&#123;</span><br><span class="line">      console.log(id);</span><br><span class="line">      operator.find(id, function operatorFound(err, entity) &#123;</span><br><span class="line">        res.send(entity,200);</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">      console.log(&quot;是啊比&quot;);</span><br><span class="line">      res.send(&quot;失败&quot;,500);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>一个简单的查询就这么完成了，写完成之后就是验证编写的正确性了。在浏览器输入url:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;localhost:1337&#x2F;user&#x2F;findOne?id&#x3D;1</span><br></pre></td></tr></table></figure>
+
+<p>查出来的结果如图所示：<br><img src="http://i.imgur.com/1h92KQK.png" alt=""><br>这条数据手动添加的，这样一个很简单的demo算完成了。</p>
+<p>###4补充</p>
+<p>如果想要修改项目访问端口，可在local.js里面添加：port:端口号，项目访问默认路径是user，想要修改的话，可以在route里面修改进行访问。<br>代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#39;&#x2F;findOne&#39;:&#123;</span><br><span class="line">    controller:&#39;UserController&#39;,</span><br><span class="line">    action:&#39;findOne&#39;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>起哄controller对应的就是controller的文件名（不添加后缀）,action:对应的就是里面的方法名。</p>
+<p><a href="http://sailsjs.com/" target="_blank" rel="noopener">sails官网</a></p>
+<p><a href="https://gruntjs.com/" target="_blank" rel="noopener">grunt官网</a></p>
+<p><a href="http://es6.ruanyifeng.com/#docs/module" target="_blank" rel="noopener">es6-阮一峰-模块</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://jackyumg.github.io/2020/04/07/css%E7%9A%84%E4%B8%89%E5%A4%A7%E7%89%B9%E6%80%A7/" data-id="ckcv8s0270004f8vm0vxj7fnj" class="article-share-link">分享</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-JS基础-（类型篇）" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/04/07/JS%E5%9F%BA%E7%A1%80-%EF%BC%88%E7%B1%BB%E5%9E%8B%E7%AF%87%EF%BC%89/" class="article-date">
-  <time datetime="2020-04-07T06:11:35.171Z" itemprop="datePublished">2020-04-07</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/07/JS%E5%9F%BA%E7%A1%80-%EF%BC%88%E7%B1%BB%E5%9E%8B%E7%AF%87%EF%BC%89/">JS基础-（类型篇）</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ul>
-<li>变量类型<ul>
-<li>JS的类型分类和判断</li>
-<li>值得类型和引用</li>
-</ul>
-</li>
-<li>原型与原型链（继承）<ul>
-<li>原型和原型链的定义</li>
-<li>继承写法</li>
-</ul>
-</li>
-<li>作用域和闭包<ul>
-<li>执行上下文</li>
-<li>this</li>
-<li>闭包是什么</li>
-</ul>
-</li>
-<li>异步<ul>
-<li>同步VS异步</li>
-<li>异步和单线程</li>
-<li>前端异步的场景</li>
-</ul>
-</li>
-<li>ES6/7新标准的考察<ul>
-<li>箭头函数</li>
-<li>Module</li>
-<li>Class</li>
-<li>Set和Map/WeakSet和WeakMapuuu</li>
-<li>Promise</li>
-</ul>
-</li>
-</ul>
-<h3 id="变量类型"><a href="#变量类型" class="headerlink" title="变量类型"></a>变量类型</h3><h4 id="变量分类"><a href="#变量分类" class="headerlink" title="变量分类"></a>变量分类</h4><p>JavaScript 是一种弱类型脚本语言，所谓弱类型指的是定义变量时，不需要什么类型，在程序运行过程中会自动判断类型。</p>
-<p>最新的 ECMAScript 标准定义了8种数据类型：</p>
-<ul>
-<li>七种基本数据类型:<ul>
-<li><strong>Boolean</strong>，有2个值分别是：<code>true</code> 和 <code>false</code>.</li>
-<li><strong>null</strong> ， 一个表明 null 值的特殊关键字。 JavaScript 是大小写敏感的，因此<code>null</code>与<code>Null</code>、<code>NULL</code>或变体完全不同。</li>
-<li><strong>undefined</strong> ，和 null 一样是一个特殊的关键字，undefined 表示变量未定义时的属性。</li>
-<li><strong>Number</strong>（数字），整数或浮点数，例如： <code>42</code> 或者 <code>3.14159</code>。</li>
-<li><strong>BigInt</strong> (任意精度的整数) ，可以安全地存储和操作大整数，甚至可以超过数字的安全整数限制。</li>
-<li><strong>String</strong>（字符串），字符串是一串表示文本值的字符序列，例如：”Howdy” 。</li>
-<li><strong>Symbol</strong>（代表） ( 在 ECMAScript 6 中新添加的类型).。一种实例是唯一且不可改变的数据类型。</li>
-<li><strong>Object</strong>（对象）</li>
-</ul>
-</li>
-</ul>
-<p><strong>注意：原始类型不包含 Object，所以原始类型有七种。</strong></p>
-<h4 id="变量判断"><a href="#变量判断" class="headerlink" title="变量判断"></a>变量判断</h4><h3 id="typeof类型判断"><a href="#typeof类型判断" class="headerlink" title="typeof类型判断"></a><code>typeof</code>类型判断</h3><p><code>typeof xxx</code> 得到的值有以下几种类型：<code>undefined</code>、<code>boolean</code>、<code>number</code>、<code>string</code>、<code>object</code>、<code>function</code>、<code>symbol</code>，比较简单，不再一一演示了。这里需要注意的有三点：</p>
-<ul>
-<li><code>typeof null</code> 结果是 <code>object</code>，实际这是 <code>typeof</code> 的一个bug，null 是原始值，非引用类型。</li>
-<li><code>typeof [1, 2]</code> 结果是 <code>object</code>，结果中没有 <code>array</code> 这一项，引用类型除了 <code>function</code> 其他的全部都是 <code>object</code>。</li>
-<li><code>typeof Symbol()</code> 用 <code>typeof</code> 获取 <code>symbol</code> 类型的值得到的是 <code>symbol</code>，一种实例是唯一且不可改变的数据类型,这是 ES6 新增的知识点。</li>
-</ul>
-<h3 id="instanceof继承判断"><a href="#instanceof继承判断" class="headerlink" title="instanceof继承判断"></a><code>instanceof</code>继承判断</h3><p>用于实例和构造函数的对应。例如判断一个变量是否是数组，使用<code>typeof</code>无法判断，但可以使用<code>[1, 2] instanceof Array</code>来判断。因为，<code>[1, 2]</code>是数组，它的构造函数就是<code>Array</code>。同理：</p>
-<pre><code>function Dog(name) { 
-    this.name = name
-}
-var hashiqi = new Dog(&apos;哈士奇&apos;) 
-console.log(hashiqi instanceof Dog) `</code></pre><h4 id="值类型与引用类型"><a href="#值类型与引用类型" class="headerlink" title="值类型与引用类型"></a>值类型与引用类型</h4><p>除了原始类型，ES 还有引用类型，上文提到的 <code>typeof</code> 识别出来的类型中，只有 <code>object</code> 和 <code>function</code> 是引用类型，其他都是值类型。<strong>注意：<code>Symbol</code> 也是值类型，实例的唯一标识</strong>。</p>
-<h5 id="值类型的赋值"><a href="#值类型的赋值" class="headerlink" title="值类型的赋值"></a>值类型的赋值</h5><pre><code>var a = 1;
-var b = 2;
-b = a;
-a++;
-b++;
-console.log(&apos;a&apos;,a);
-console.log(&apos;b&apos;,b);
-// 打印结果：
-a 2
-b 2</code></pre><p>上述示例中，a , b 为值类型，在a赋值给b的时候，b的值修改为了1，a++,与b++之后，a、b成为了2。</p>
-<h5 id="引用类型的赋值"><a href="#引用类型的赋值" class="headerlink" title="引用类型的赋值"></a>引用类型的赋值</h5><pre><code>var a = {name:&apos;张三&apos;,age:4};
-var b = {name:&apos;&apos;王五,age: 12};
-a = b;
-a.age++;
-console.log(&apos;a&apos;, a); 
-console.log(&apos;b&apos;, b);
-// 打印结果
-a {name:&apos;王五&apos;,age: 13}
-b {name:&apos;王五&apos;,age: 13}</code></pre><p>上述示例中，a , b为引用类型，在b赋值给a的时候，a的地址指向了b，所以a： {name:’王五’,age: 12},a的年龄加上后就变为了12而非5。</p>
-<p>这就是因为<code>Number</code>类型的<code>a</code>是按值传递的，而<code>Object</code>类型的<code>b</code>是按引用传递的。</p>
-<p>如图所示：<br><img src="https://image-static.segmentfault.com/427/313/4273137309-5e8972ac22c7c_articlex" alt="i&amp;o进销存管理系统架构图.png"></p>
-<p>num1 与 str1 是值类型，obj 是引用类型，从图来看应该就知道值类型与引用类型赋值时的区别了，而引用类型采用这种方式也大大节约了内存，毕竟一大大的对象过多会导致这样的问题。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://jackyumg.github.io/2020/04/07/JS%E5%9F%BA%E7%A1%80-%EF%BC%88%E7%B1%BB%E5%9E%8B%E7%AF%87%EF%BC%89/" data-id="ckcv8s01r0000f8vmfxljasp4" class="article-share-link">分享</a>
+      <a data-url="https://jackyumg.github.io/2020/04/07/Sails+MVC+Mysql+Node+%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%80/" data-id="ckg3cfnsy0003bovm8az72it3" class="article-share-link">分享</a>
       
       
     </footer>
@@ -631,7 +627,7 @@ b {name:&apos;王五&apos;,age: 13}</code></pre><p>上述示例中，a , b为引
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/2/">上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+    <a class="extend prev" rel="prev" href="/page/2/">上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/">下一页</a>
   </nav>
 
 </section>
@@ -650,7 +646,7 @@ b {name:&apos;王五&apos;,age: 13}</code></pre><p>上述示例中，a , b为引
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a></li></ul>
     </div>
   </div>
 
@@ -661,6 +657,10 @@ b {name:&apos;王五&apos;,age: 13}</code></pre><p>上述示例中，a , b为引
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2020/08/13/%E6%AF%8F%E5%A4%A9%E5%9D%9A%E6%8C%81%E4%B8%80%E4%B8%AAcss-%E7%94%A8%E5%88%B8%E5%8D%A1%E7%89%87/">每天坚持一个css-用券卡片</a>
+          </li>
         
           <li>
             <a href="/2020/07/20/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F%E4%B8%8E%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F/">观察者模式与订阅模式</a>
@@ -676,10 +676,6 @@ b {name:&apos;王五&apos;,age: 13}</code></pre><p>上述示例中，a , b为引
         
           <li>
             <a href="/2020/04/15/css%E5%8A%A8%E7%94%BB/">css动画</a>
-          </li>
-        
-          <li>
-            <a href="/2020/04/07/%E9%9B%86%E5%90%88%E4%B8%8E%E5%AD%97%E5%85%B8/">集合与字典</a>
           </li>
         
       </ul>

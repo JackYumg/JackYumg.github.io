@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>每天坚持一个css-用券卡片 | JackYumg的学习空间</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="每天一个CSS-用券卡片 卡券效果预览地址 效果图 疑问圆角好画，但是缺圆角怎么画呢？ 思路第一步：卡片背景色填充方便调试。【OK】第二步：区分元素，按照上、中、下的顺序排序堆叠。【OK】第三步：画圆缺角，也是比较重要的一步。【？】 知识点background: radial-gradient绘制圆缺角的重要知识点，背景色径向渐变。实现思路的源代码地址 水平方向卡片，右上、右下缺圆角 创建圆形，使">
+<meta property="og:type" content="article">
+<meta property="og:title" content="每天坚持一个css-用券卡片">
+<meta property="og:url" content="https://jackyumg.github.io/2020/08/13/%E6%AF%8F%E5%A4%A9%E5%9D%9A%E6%8C%81%E4%B8%80%E4%B8%AAcss-%E7%94%A8%E5%88%B8%E5%8D%A1%E7%89%87/index.html">
+<meta property="og:site_name" content="JackYumg的学习空间">
+<meta property="og:description" content="每天一个CSS-用券卡片 卡券效果预览地址 效果图 疑问圆角好画，但是缺圆角怎么画呢？ 思路第一步：卡片背景色填充方便调试。【OK】第二步：区分元素，按照上、中、下的顺序排序堆叠。【OK】第三步：画圆缺角，也是比较重要的一步。【？】 知识点background: radial-gradient绘制圆缺角的重要知识点，背景色径向渐变。实现思路的源代码地址 水平方向卡片，右上、右下缺圆角 创建圆形，使">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://segmentfault.com/img/bVbROH0">
+<meta property="og:image" content="https://segmentfault.com/img/bVcgSNR">
+<meta property="article:published_time" content="2020-08-13T11:34:59.406Z">
+<meta property="article:modified_time" content="2020-10-10T07:13:36.308Z">
+<meta property="article:author" content="JackYumg">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://segmentfault.com/img/bVbROH0">
+  
+    <link rel="alternate" href="/atom.xml" title="JackYumg的学习空间" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">JackYumg的学习空间</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">主页</a>
+        
+          <a class="main-nav-link" href="/archives">文章列表</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://jackyumg.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-每天坚持一个css-用券卡片" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/08/13/%E6%AF%8F%E5%A4%A9%E5%9D%9A%E6%8C%81%E4%B8%80%E4%B8%AAcss-%E7%94%A8%E5%88%B8%E5%8D%A1%E7%89%87/" class="article-date">
+  <time datetime="2020-08-13T11:34:59.406Z" itemprop="datePublished">2020-08-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      每天坚持一个css-用券卡片
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="每天一个CSS-用券卡片"><a href="#每天一个CSS-用券卡片" class="headerlink" title="每天一个CSS-用券卡片"></a>每天一个CSS-用券卡片</h2><p> <a href="https://stackblitz.com/edit/angular-ivy-j4maow?file=src/app/app.component.less" target="_blank" rel="noopener">卡券效果预览地址</a></p>
+<h3 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h3><p><img src="https://segmentfault.com/img/bVbROH0" alt="image"></p>
+<h3 id="疑问"><a href="#疑问" class="headerlink" title="疑问"></a>疑问</h3><p>圆角好画，但是缺圆角怎么画呢？</p>
+<h4 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h4><p>第一步：卡片背景色填充方便调试。【OK】<br>第二步：区分元素，按照上、中、下的顺序排序堆叠。【OK】<br>第三步：画圆缺角，也是比较重要的一步。【？】</p>
+<h3 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h3><h4 id="background-radial-gradient"><a href="#background-radial-gradient" class="headerlink" title="background: radial-gradient"></a>background: radial-gradient</h4><p>绘制圆缺角的重要知识点，背景色径向渐变。<br><a href="https://stackblitz.com/edit/angular-ivy-s2cpr9?file=src/app/app.component.less" target="_blank" rel="noopener">实现思路的源代码地址</a></p>
+<h5 id="水平方向卡片，右上、右下缺圆角"><a href="#水平方向卡片，右上、右下缺圆角" class="headerlink" title="水平方向卡片，右上、右下缺圆角"></a>水平方向卡片，右上、右下缺圆角</h5><ol>
+<li>创建圆形，使用镜像渐变在方块上面创建一个圆。</li>
+<li>位置调整，调整圆的位置，将圆的中点调整至方块角处，形成凹圆角。<code>background:  radial-gradient(circle at right top, transparent 5px, #44C9A1 0);</code></li>
+<li>绘制第二个圆、与调整位置，<code>background:  radial-gradient(circle at right bottom, transparent 5px, #44C9A1 0);</code>，发现得不到想要的效果。</li>
+<li>分析原因：background属性，默认100%大小与repeat展开，导致了重叠。</li>
+<li>设置背景:background:no-repeat;background-size： 100% 50%（水平方向 垂直方向），（这里设置50%在垂直方向，是因为准备在右上、右下方向设置缺角）。</li>
+<li>设置完成后发现得不到效果，最后发现忽略了一个重要的事情，就是背景展开方向，因为是垂直的，所以应该是从上右到左下与下右到左上。所以修改为background:  radial-gradient(circle at bottom right, transparent 5px, #44C9A1 0) bottom right;</li>
+</ol>
+<h5 id="参数说明"><a href="#参数说明" class="headerlink" title="参数说明"></a>参数说明</h5><p>radial-gradient(circle at bottom right, transparent 5px, #44C9A1 0) bottom right</p>
+<p>circle: 圆形 。<br>at :位于 。<br>bottom right : 右下角 （可用% ,px等具有单位的数值表示） transparent: 圆的背景颜色以父元素为准。<br>5px: 圆的半径。<br>#44c9A1：方块的背景颜色<br>0 ：径向渐变的程度，值为0时，无渐变。当值大于0时，从圆心处径向渐变至方块。<br>bottom right：表示方块背景的起始位置。</p>
+<h4 id="filter-drop-shadow"><a href="#filter-drop-shadow" class="headerlink" title="filter: drop-shadow"></a>filter: drop-shadow</h4><p>会按照图形（不限于图片，三角形也可以）形状在图片背后进行投影，即当背景透明时按照图形轮廓边界投影阴影。<a href="https://angular-ivy-pur2rj.stackblitz.io" target="_blank" rel="noopener">效果地址</a></p>
+<p>效果图：<br><img src="https://segmentfault.com/img/bVcgSNR" alt="image"></p>
+<p><code>区别 box-shadow,boxShadow是以元素边界轮廓进行投影</code>。</p>
+<h4 id="浏览器支持"><a href="#浏览器支持" class="headerlink" title="浏览器支持"></a>浏览器支持</h4><p>Chrome , FirFox, EDge 最新版本都支持,不考虑IE。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://jackyumg.github.io/2020/08/13/%E6%AF%8F%E5%A4%A9%E5%9D%9A%E6%8C%81%E4%B8%80%E4%B8%AAcss-%E7%94%A8%E5%88%B8%E5%8D%A1%E7%89%87/" data-id="ckg3cfnt40008bovmg7ip7fdk" class="article-share-link">分享</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2020/07/20/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F%E4%B8%8E%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">观察者模式与订阅模式</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/08/13/%E6%AF%8F%E5%A4%A9%E5%9D%9A%E6%8C%81%E4%B8%80%E4%B8%AAcss-%E7%94%A8%E5%88%B8%E5%8D%A1%E7%89%87/">每天坚持一个css-用券卡片</a>
+          </li>
+        
+          <li>
+            <a href="/2020/07/20/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F%E4%B8%8E%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F/">观察者模式与订阅模式</a>
+          </li>
+        
+          <li>
+            <a href="/2020/07/20/rxjs%E8%A7%82%E5%AF%9F%E8%80%85/">rxjs观察者</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/16/rxjs%E6%93%8D%E4%BD%9C%E7%AC%A6%E8%AF%B4%E6%98%8E/">rxjs操作符说明</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/15/css%E5%8A%A8%E7%94%BB/">css动画</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 JackYumg<br>
+      授权 <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

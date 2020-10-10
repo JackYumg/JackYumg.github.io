@@ -64,6 +64,61 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-每天坚持一个css-用券卡片" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/08/13/%E6%AF%8F%E5%A4%A9%E5%9D%9A%E6%8C%81%E4%B8%80%E4%B8%AAcss-%E7%94%A8%E5%88%B8%E5%8D%A1%E7%89%87/" class="article-date">
+  <time datetime="2020-08-13T11:34:59.406Z" itemprop="datePublished">2020-08-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/08/13/%E6%AF%8F%E5%A4%A9%E5%9D%9A%E6%8C%81%E4%B8%80%E4%B8%AAcss-%E7%94%A8%E5%88%B8%E5%8D%A1%E7%89%87/">每天坚持一个css-用券卡片</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="每天一个CSS-用券卡片"><a href="#每天一个CSS-用券卡片" class="headerlink" title="每天一个CSS-用券卡片"></a>每天一个CSS-用券卡片</h2><p> <a href="https://stackblitz.com/edit/angular-ivy-j4maow?file=src/app/app.component.less" target="_blank" rel="noopener">卡券效果预览地址</a></p>
+<h3 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h3><p><img src="https://segmentfault.com/img/bVbROH0" alt="image"></p>
+<h3 id="疑问"><a href="#疑问" class="headerlink" title="疑问"></a>疑问</h3><p>圆角好画，但是缺圆角怎么画呢？</p>
+<h4 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h4><p>第一步：卡片背景色填充方便调试。【OK】<br>第二步：区分元素，按照上、中、下的顺序排序堆叠。【OK】<br>第三步：画圆缺角，也是比较重要的一步。【？】</p>
+<h3 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h3><h4 id="background-radial-gradient"><a href="#background-radial-gradient" class="headerlink" title="background: radial-gradient"></a>background: radial-gradient</h4><p>绘制圆缺角的重要知识点，背景色径向渐变。<br><a href="https://stackblitz.com/edit/angular-ivy-s2cpr9?file=src/app/app.component.less" target="_blank" rel="noopener">实现思路的源代码地址</a></p>
+<h5 id="水平方向卡片，右上、右下缺圆角"><a href="#水平方向卡片，右上、右下缺圆角" class="headerlink" title="水平方向卡片，右上、右下缺圆角"></a>水平方向卡片，右上、右下缺圆角</h5><ol>
+<li>创建圆形，使用镜像渐变在方块上面创建一个圆。</li>
+<li>位置调整，调整圆的位置，将圆的中点调整至方块角处，形成凹圆角。<code>background:  radial-gradient(circle at right top, transparent 5px, #44C9A1 0);</code></li>
+<li>绘制第二个圆、与调整位置，<code>background:  radial-gradient(circle at right bottom, transparent 5px, #44C9A1 0);</code>，发现得不到想要的效果。</li>
+<li>分析原因：background属性，默认100%大小与repeat展开，导致了重叠。</li>
+<li>设置背景:background:no-repeat;background-size： 100% 50%（水平方向 垂直方向），（这里设置50%在垂直方向，是因为准备在右上、右下方向设置缺角）。</li>
+<li>设置完成后发现得不到效果，最后发现忽略了一个重要的事情，就是背景展开方向，因为是垂直的，所以应该是从上右到左下与下右到左上。所以修改为background:  radial-gradient(circle at bottom right, transparent 5px, #44C9A1 0) bottom right;</li>
+</ol>
+<h5 id="参数说明"><a href="#参数说明" class="headerlink" title="参数说明"></a>参数说明</h5><p>radial-gradient(circle at bottom right, transparent 5px, #44C9A1 0) bottom right</p>
+<p>circle: 圆形 。<br>at :位于 。<br>bottom right : 右下角 （可用% ,px等具有单位的数值表示） transparent: 圆的背景颜色以父元素为准。<br>5px: 圆的半径。<br>#44c9A1：方块的背景颜色<br>0 ：径向渐变的程度，值为0时，无渐变。当值大于0时，从圆心处径向渐变至方块。<br>bottom right：表示方块背景的起始位置。</p>
+<h4 id="filter-drop-shadow"><a href="#filter-drop-shadow" class="headerlink" title="filter: drop-shadow"></a>filter: drop-shadow</h4><p>会按照图形（不限于图片，三角形也可以）形状在图片背后进行投影，即当背景透明时按照图形轮廓边界投影阴影。<a href="https://angular-ivy-pur2rj.stackblitz.io" target="_blank" rel="noopener">效果地址</a></p>
+<p>效果图：<br><img src="https://segmentfault.com/img/bVcgSNR" alt="image"></p>
+<p><code>区别 box-shadow,boxShadow是以元素边界轮廓进行投影</code>。</p>
+<h4 id="浏览器支持"><a href="#浏览器支持" class="headerlink" title="浏览器支持"></a>浏览器支持</h4><p>Chrome , FirFox, EDge 最新版本都支持,不考虑IE。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://jackyumg.github.io/2020/08/13/%E6%AF%8F%E5%A4%A9%E5%9D%9A%E6%8C%81%E4%B8%80%E4%B8%AAcss-%E7%94%A8%E5%88%B8%E5%8D%A1%E7%89%87/" data-id="ckg3cfnt40008bovmg7ip7fdk" class="article-share-link">分享</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-观察者模式与订阅模式" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/07/20/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F%E4%B8%8E%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F/" class="article-date">
@@ -86,22 +141,23 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="观察者模式与发布订阅模式"><a href="#观察者模式与发布订阅模式" class="headerlink" title="观察者模式与发布订阅模式"></a>观察者模式与发布订阅模式</h2><h3 id="观察者模式"><a href="#观察者模式" class="headerlink" title="观察者模式"></a>观察者模式</h3><p><code>模式类型</code>：行为型模式</p>
+        <h2 id="设计模式学习之-观察者模式与发布订阅模式"><a href="#设计模式学习之-观察者模式与发布订阅模式" class="headerlink" title="设计模式学习之 观察者模式与发布订阅模式"></a>设计模式学习之 观察者模式与发布订阅模式</h2><h3 id="观察者模式"><a href="#观察者模式" class="headerlink" title="观察者模式"></a>观察者模式</h3><p><code>模式类型</code>：行为型模式</p>
 <p><code>应用场景</code>：当一个对象被修改时，则会自动通知依赖他的对象（概念太抽象）。</p>
 <p><code>对象间关系</code>：  观察者(n) - 被观察者(1)</p>
 <h4 id="应用实例"><a href="#应用实例" class="headerlink" title="应用实例"></a>应用实例</h4><p>在A校有一个学生仪表监控系统，而监控到学生A穿拖鞋上学系统就会报警发出警告</p>
 <h4 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h4><p>观察者会受被观察对象刺激，然后做出反应。比如说猫与老鼠洞，当猫探查老鼠洞时发现了里面的老鼠时(被老鼠刺激)，猫会叫并捉老鼠，当探查老鼠洞无老鼠时，猫也会走开，便无观察者与被观察者。</p>
-<p>另外观察者别名为订阅与发布，例如，在微博关注了王一博，他发消息我都能收到。</p>
+<p>另外观察者别名为“订阅与发布”，例如，在微博关注了王一博，他发消息后我都能收到。</p>
 <h3 id="发布与订阅模式"><a href="#发布与订阅模式" class="headerlink" title="发布与订阅模式"></a>发布与订阅模式</h3><p><code>模式类型</code>：行为型模式</p>
 <p><code>应用场景</code>：首先发布者需要发布话题，发布完成后，话题被订阅订阅者们定义，然后，关于该话题内容的修改会通过消息发给订阅者，无订阅者时，就不会随意发送消息。</p>
 <p><code>对象间关系</code>：发布者 (1) - 话题(n)  话题(1) - 订阅者(0-n)</p>
 <h4 id="应用实例-1"><a href="#应用实例-1" class="headerlink" title="应用实例"></a>应用实例</h4><p>在A论坛上，B同学发布了一个C话题，然后D同学对该话题感兴趣想知道更多，于是点了关注。在后面的日子里，B同学在C话题里面发布了一个问题，而D同学在论坛消息里面收到了C话题通知的消息。</p>
 <h4 id="现实简单例子"><a href="#现实简单例子" class="headerlink" title="现实简单例子"></a>现实简单例子</h4><p>微信公众号、QQ空间、知乎问答、掘金问答、Segmentfault回答问题的消息等等</p>
-<h4 id="说明-1"><a href="#说明-1" class="headerlink" title="说明"></a>说明</h4>
+<h4 id="说明-1"><a href="#说明-1" class="headerlink" title="说明"></a>说明</h4><p>没有了话题这个对象，那么就变为了订阅与发布模式，</p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://jackyumg.github.io/2020/07/20/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F%E4%B8%8E%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F/" data-id="ckcv8s02t0009f8vmeg6i0q5z" class="article-share-link">分享</a>
+      <a data-url="https://jackyumg.github.io/2020/07/20/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F%E4%B8%8E%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F/" data-id="ckg3cfnt50009bovm3x2k7zu4" class="article-share-link">分享</a>
       
       
     </footer>
@@ -137,7 +193,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://jackyumg.github.io/2020/07/20/rxjs%E8%A7%82%E5%AF%9F%E8%80%85/" data-id="ckcv8s02r0007f8vm523u2ae0" class="article-share-link">分享</a>
+      <a data-url="https://jackyumg.github.io/2020/07/20/rxjs%E8%A7%82%E5%AF%9F%E8%80%85/" data-id="ckg3cfnt00005bovm8zfbelhz" class="article-share-link">分享</a>
       
       
     </footer>
@@ -173,7 +229,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://jackyumg.github.io/2020/04/16/rxjs%E6%93%8D%E4%BD%9C%E7%AC%A6%E8%AF%B4%E6%98%8E/" data-id="ckcv8s039000ef8vm4ueffbm8" class="article-share-link">分享</a>
+      <a data-url="https://jackyumg.github.io/2020/04/16/rxjs%E6%93%8D%E4%BD%9C%E7%AC%A6%E8%AF%B4%E6%98%8E/" data-id="ckg3cfntf000ebovme9bo3l2w" class="article-share-link">分享</a>
       
       
     </footer>
@@ -326,309 +382,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://jackyumg.github.io/2020/04/15/css%E5%8A%A8%E7%94%BB/" data-id="ckcv8s030000cf8vm8nljdhto" class="article-share-link">分享</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-集合与字典" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/04/07/%E9%9B%86%E5%90%88%E4%B8%8E%E5%AD%97%E5%85%B8/" class="article-date">
-  <time datetime="2020-04-07T06:11:35.179Z" itemprop="datePublished">2020-04-07</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/07/%E9%9B%86%E5%90%88%E4%B8%8E%E5%AD%97%E5%85%B8/">集合与字典</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>Set 和 Map 主要的应用场景在于 数据重组 和 数据储存</strong></p>
-<p><strong>Set 是一种叫做集合的数据结构，Map 是一种叫做字典的数据结构</strong></p>
-<h1 id="1-集合（Set）"><a href="#1-集合（Set）" class="headerlink" title="1. 集合（Set）"></a>1. 集合（Set）</h1><p>ES6 新增的一种新的数据结构，类似于数组，但成员是唯一且无序的，没有重复的值。</p>
-<p>Set 本身是一种构造函数，用来生成 Set 数据结构。</p>
-<p>new Set([iterable])<br>举个例子：</p>
-<pre><code>const s = new Set();
-[1, 2, 3, 4, 3, 2, 1].forEach(x =&gt; s.add(x))
-
-for (let i of s) {
-    console.log(i)    // 1 2 3 4
-}
-
-// 去重数组的重复对象
-let arr = [1, 2, 3, 2, 1, 1]
-[... new Set(arr)]    // [1, 2, 3]</code></pre><p>Set 对象允许你储存任何类型的唯一值，无论是原始值或者是对象引用。</p>
-<p>向 Set 加入值的时候，不会发生类型转换，所以5和”5”是两个不同的值。Set 内部判断两个值是否不同，使用的算法叫做“Same-value-zero equality”，它类似于精确相等运算符（===），主要的区别是<strong>NaN等于自身，而精确相等运算符认为NaN不等于自身。</strong></p>
-<pre><code>let set = new Set();
-let a = NaN;
-let b = NaN;
-set.add(a);
-set.add(b);
-set // Set {NaN}
-
-let set1 = new Set()
-set1.add(5)
-set1.add(&apos;5&apos;)
-console.log([...set1])    // [5, &quot;5&quot;]</code></pre><h3 id="Set-实例属性"><a href="#Set-实例属性" class="headerlink" title="Set 实例属性"></a>Set 实例属性</h3><h4 id="constructor：-构造函数"><a href="#constructor：-构造函数" class="headerlink" title="constructor： 构造函数"></a>constructor： 构造函数</h4><h4 id="size：元素数量"><a href="#size：元素数量" class="headerlink" title="size：元素数量"></a>size：元素数量</h4><pre><code>let set = new Set([1, 2, 3, 2, 1])
-
-console.log(set.length)    // undefined
-console.log(set.size)    // 3</code></pre><h3 id="Set-实例方法"><a href="#Set-实例方法" class="headerlink" title="Set 实例方法"></a>Set 实例方法</h3><h4 id="操作方法"><a href="#操作方法" class="headerlink" title="操作方法"></a>操作方法</h4><pre><code>add(value)：新增，相当于 array里的push
-
-delete(value)：存在即删除集合中value
-
-has(value)：判断集合中是否存在 value
-
-clear()：清空集合
-
-let set = new Set()
-set.add(1).add(2).add(1)
-
-set.has(1)    // true
-set.has(3)    // false
-set.delete(1)    
-set.has(1)    // false</code></pre><h5 id="Array-from-方法可以将-Set-结构转为数组"><a href="#Array-from-方法可以将-Set-结构转为数组" class="headerlink" title="Array.from 方法可以将 Set 结构转为数组"></a>Array.from 方法可以将 Set 结构转为数组</h5><pre><code>const items = new Set([1, 2, 3, 2])
-const array = Array.from(items)
-console.log(array)    // [1, 2, 3]
-// 或
-const arr = [...items]
-console.log(arr)    // [1, 2, 3]</code></pre><h4 id="遍历方法（遍历顺序为插入顺序）"><a href="#遍历方法（遍历顺序为插入顺序）" class="headerlink" title="遍历方法（遍历顺序为插入顺序）"></a>遍历方法（遍历顺序为插入顺序）</h4><p>keys()：返回一个包含集合中所有键的迭代器</p>
-<p>values()：返回一个包含集合中所有值得迭代器</p>
-<p>entries()：返回一个包含Set对象中所有元素得键值对迭代器</p>
-<p>forEach(callbackFn, thisArg)：用于对集合成员执行callbackFn操作，如果提供了 thisArg 参数，回调中的this会是这个参数，没有返回值</p>
-<pre><code>let set = new Set([1, 2, 3])
-console.log(set.keys())    // SetIterator {1, 2, 3}
-console.log(set.values())    // SetIterator {1, 2, 3}
-console.log(set.entries())    // SetIterator {1, 2, 3}
-
-for (let item of set.keys()) {
-  console.log(item);
-}    // 1    2     3
-for (let item of set.entries()) {
-  console.log(item);
-}    // [1, 1]    [2, 2]    [3, 3]
-
-set.forEach((value, key) =&gt; {
-    console.log(key + &apos; : &apos; + value)
-})    // 1 : 1    2 : 2    3 : 3
-console.log([...set])    // [1, 2, 3]</code></pre><h3 id="Set-可默认遍历，默认迭代器生成函数是-values-方法"><a href="#Set-可默认遍历，默认迭代器生成函数是-values-方法" class="headerlink" title="Set 可默认遍历，默认迭代器生成函数是 values() 方法"></a>Set 可默认遍历，默认迭代器生成函数是 values() 方法</h3><pre><code>Set.prototype[Symbol.iterator] === Set.prototype.values    // true
-所以， Set可以使用 map、filter 方法
-
-let set = new Set([1, 2, 3])
-set = new Set([...set].map(item =&gt; item * 2))
-console.log([...set])    // [2, 4, 6]
-
-set = new Set([...set].filter(item =&gt; (item &gt;= 4)))
-console.log([...set])    //[4, 6]
-因此，Set 很容易实现交集（Intersect）、并集（Union）、差集（Difference）
-
-let set1 = new Set([1, 2, 3])
-let set2 = new Set([4, 3, 2])
-
-let intersect = new Set([...set1].filter(value =&gt; set2.has(value)))
-let union = new Set([...set1, ...set2])
-let difference = new Set([...set1].filter(value =&gt; !set2.has(value)))
-
-console.log(intersect)    // Set {2, 3}
-console.log(union)        // Set {1, 2, 3, 4}
-console.log(difference)    // Set {1}</code></pre><h3 id="2-WeakSet"><a href="#2-WeakSet" class="headerlink" title="2. WeakSet"></a>2. WeakSet</h3><h4 id="WeakSet-对象允许你将弱引用对象储存在一个集合中"><a href="#WeakSet-对象允许你将弱引用对象储存在一个集合中" class="headerlink" title="WeakSet 对象允许你将弱引用对象储存在一个集合中"></a>WeakSet 对象允许你将弱引用对象储存在一个集合中</h4><h4 id="WeakSet-与-Set-的区别："><a href="#WeakSet-与-Set-的区别：" class="headerlink" title="WeakSet 与 Set 的区别："></a>WeakSet 与 Set 的区别：</h4><p>WeakSet 只能储存对象引用，不能存放值，而 Set 对象都可以<br>WeakSet 对象中储存的对象值都是被弱引用的，即垃圾回收机制不考虑 WeakSet 对该对象的应用，如果没有其他的变量或属性引用这个对象值，则这个对象将会被垃圾回收掉（不考虑该对象还存在于 WeakSet 中），所以，WeakSet 对象里有多少个成员元素，取决于垃圾回收机制有没有运行，运行前后成员个数可能不一致，遍历结束之后，有的成员可能取不到了（被垃圾回收了），WeakSet 对象是无法被遍历的（ES6 规定 WeakSet 不可遍历），也没有办法拿到它包含的所有元素<br>属性：</p>
-<pre><code>constructor：构造函数，任何一个具有 Iterable 接口的对象，都可以作参数
-
-const arr = [[1, 2], [3, 4]]
-const weakset = new WeakSet(arr)
-console.log(weakset)</code></pre><h4 id="方法："><a href="#方法：" class="headerlink" title="方法："></a>方法：</h4><p>add(value)：在WeakSet 对象中添加一个元素value<br>has(value)：判断 WeakSet 对象中是否包含value<br>delete(value)：删除元素 value<br>clear()：清空所有元素，注意该方法已废弃</p>
-<pre><code>var ws = new WeakSet()
-var obj = {}
-var foo = {}
-
-ws.add(window)
-ws.add(obj)
-
-ws.has(window)    // true
-ws.has(foo)    // false
-
-ws.delete(window)    // true
-ws.has(window)    // false</code></pre><h3 id="3-字典（Map）"><a href="#3-字典（Map）" class="headerlink" title="3. 字典（Map）"></a>3. 字典（Map）</h3><h4 id="集合-与-字典-的区别："><a href="#集合-与-字典-的区别：" class="headerlink" title="集合 与 字典 的区别："></a>集合 与 字典 的区别：</h4><p>共同点：集合、字典 可以储存不重复的值<br>不同点：集合 是以 [value, value]的形式储存元素，字典 是以 [key, value] 的形式储存</p>
-<pre><code>const m = new Map()
-const o = {p: &apos;haha&apos;}
-m.set(o, &apos;content&apos;)
-m.get(o)    // content
-
-m.has(o)    // true
-m.delete(o)    // true
-m.has(o)    // false</code></pre><p>任何具有 Iterator 接口、且每个成员都是一个双元素的数组的数据结构都可以当作Map构造函数的参数，例如：</p>
-<pre><code>const set = new Set([
-  [&apos;foo&apos;, 1],
-  [&apos;bar&apos;, 2]
-]);
-const m1 = new Map(set);
-m1.get(&apos;foo&apos;) // 1
-
-const m2 = new Map([[&apos;baz&apos;, 3]]);
-const m3 = new Map(m2);
-m3.get(&apos;baz&apos;) // 3
-如果读取一个未知的键，则返回undefined。
-
-new Map().get(&apos;asfddfsasadf&apos;)
-// undefined</code></pre><p>注意，只有对同一个对象的引用，Map 结构才将其视为同一个键。这一点要非常小心。</p>
-<pre><code>const map = new Map();
-
-map.set([&apos;a&apos;], 555);
-map.get([&apos;a&apos;]) // undefined</code></pre><p>上面代码的set和get方法，表面是针对同一个键，但实际上这是两个值，内存地址是不一样的，因此get方法无法读取该键，返回undefined。</p>
-<p>由上可知，Map 的键实际上是跟内存地址绑定的，只要内存地址不一样，就视为两个键。这就解决了同名属性碰撞（clash）的问题，我们扩展别人的库的时候，如果使用对象作为键名，就不用担心自己的属性与原作者的属性同名。</p>
-<p>如果 Map 的键是一个简单类型的值（数字、字符串、布尔值），则只要两个值严格相等，Map 将其视为一个键，比如0和-0就是一个键，布尔值true和字符串true则是两个不同的键。另外，undefined和null也是两个不同的键。虽然NaN不严格相等于自身，但 Map 将其视为同一个键。</p>
-<pre><code>let map = new Map();
-
-map.set(-0, 123);
-map.get(+0) // 123
-
-map.set(true, 1);
-map.set(&apos;true&apos;, 2);
-map.get(true) // 1
-
-map.set(undefined, 3);
-map.set(null, 4);
-map.get(undefined) // 3
-
-map.set(NaN, 123);
-map.get(NaN) // 123
-Map 的属性及方法</code></pre><p>属性：</p>
-<p>constructor：构造函数</p>
-<p>size：返回字典中所包含的元素个数</p>
-<pre><code>const map = new Map([
-  [&apos;name&apos;, &apos;An&apos;],
-  [&apos;des&apos;, &apos;JS&apos;]
-]);
-
-map.size // 2
-操作方法：
-
-set(key, value)：向字典中添加新元素
-get(key)：通过键查找特定的数值并返回
-has(key)：判断字典中是否存在键key
-delete(key)：通过键 key 从字典中移除对应的数据
-clear()：将这个字典中的所有元素删除
-遍历方法
-
-Keys()：将字典中包含的所有键名以迭代器形式返回
-values()：将字典中包含的所有数值以迭代器形式返回
-entries()：返回所有成员的迭代器
-forEach()：遍历字典的所有成员
-
-const map = new Map([
-            [&apos;name&apos;, &apos;An&apos;],
-            [&apos;des&apos;, &apos;JS&apos;]
-        ]);
-console.log(map.entries())    // MapIterator {&quot;name&quot; =&gt; &quot;An&quot;, &quot;des&quot; =&gt; &quot;JS&quot;}
-console.log(map.keys()) // MapIterator {&quot;name&quot;, &quot;des&quot;}
-Map 结构的默认遍历器接口（Symbol.iterator属性），就是entries方法。
-
-map[Symbol.iterator] === map.entries
-// true</code></pre><p>Map 结构转为数组结构，比较快速的方法是使用扩展运算符（…）。</p>
-<p>对于 forEach ，看一个例子</p>
-<pre><code>const reporter = {
-  report: function(key, value) {
-    console.log(&quot;Key: %s, Value: %s&quot;, key, value);
-  }
-};
-
-let map = new Map([
-    [&apos;name&apos;, &apos;An&apos;],
-    [&apos;des&apos;, &apos;JS&apos;]
-])
-map.forEach(function(value, key, map) {
-  this.report(key, value);
-}, reporter);
-// Key: name, Value: An
-// Key: des, Value: JS</code></pre><p>在这个例子中， forEach 方法的回调函数的 this，就指向 reporter</p>
-<p>与其他数据结构的相互转换</p>
-<h5 id="Map-转-Array"><a href="#Map-转-Array" class="headerlink" title="Map 转 Array"></a>Map 转 Array</h5><pre><code>const map = new Map([[1, 1], [2, 2], [3, 3]])
-console.log([...map])    // [[1, 1], [2, 2], [3, 3]]
-Array 转 Map
-
-const map = new Map([[1, 1], [2, 2], [3, 3]])
-console.log(map)    // Map {1 =&gt; 1, 2 =&gt; 2, 3 =&gt; 3}</code></pre><h5 id="Map-转-Object"><a href="#Map-转-Object" class="headerlink" title="Map 转 Object"></a>Map 转 Object</h5><p>因为 Object 的键名都为字符串，而Map 的键名为对象，所以转换的时候会把非字符串键名转换为字符串键名。</p>
-<pre><code>function mapToObj(map) {
-    let obj = Object.create(null)
-    for (let [key, value] of map) {
-        obj[key] = value
-    }
-    return obj
-}
-const map = new Map().set(&apos;name&apos;, &apos;An&apos;).set(&apos;des&apos;, &apos;JS&apos;)
-mapToObj(map)  // {name: &quot;An&quot;, des: &quot;JS&quot;}</code></pre><h5 id="Object-转-Map"><a href="#Object-转-Map" class="headerlink" title="Object 转 Map"></a>Object 转 Map</h5><pre><code>function objToMap(obj) {
-    let map = new Map()
-    for (let key of Object.keys(obj)) {
-        map.set(key, obj[key])
-    }
-    return map
-}
-
-objToMap({&apos;name&apos;: &apos;An&apos;, &apos;des&apos;: &apos;JS&apos;}) // Map {&quot;name&quot; =&gt; &quot;An&quot;, &quot;des&quot; =&gt; &quot;JS&quot;}
-Map 转 JSON
-
-function mapToJson(map) {
-    return JSON.stringify([...map])
-}
-
-let map = new Map().set(&apos;name&apos;, &apos;An&apos;).set(&apos;des&apos;, &apos;JS&apos;)
-mapToJson(map)    // [[&quot;name&quot;,&quot;An&quot;],[&quot;des&quot;,&quot;JS&quot;]]
-JSON 转 Map
-
-function jsonToStrMap(jsonStr) {
-  return objToMap(JSON.parse(jsonStr));
-}
-
-jsonToStrMap(&apos;{&quot;name&quot;: &quot;An&quot;, &quot;des&quot;: &quot;JS&quot;}&apos;) // Map {&quot;name&quot; =&gt; &quot;An&quot;, &quot;des&quot; =&gt; &quot;JS&quot;}</code></pre><h3 id="4-WeakMap"><a href="#4-WeakMap" class="headerlink" title="4. WeakMap"></a>4. WeakMap</h3><p>WeakMap 对象是一组键值对的集合，其中的键是弱引用对象，而值可以是任意。</p>
-<p>注意，WeakMap 弱引用的只是键名，而不是键值。键值依然是正常引用。</p>
-<p>WeakMap 中，每个键对自己所引用对象的引用都是弱引用，在没有其他引用和该键引用同一对象，这个对象将会被垃圾回收（相应的key则变成无效的），所以，WeakMap 的 key 是不可枚举的。</p>
-<p>属性：</p>
-<p>constructor：构造函数<br>方法：</p>
-<p>has(key)：判断是否有 key 关联对象<br>get(key)：返回key关联对象（没有则则返回 undefined）<br>set(key)：设置一组key关联对象<br>delete(key)：移除 key 的关联对象<br>let myElement = document.getElementById(‘logo’);<br>let myWeakmap = new WeakMap();</p>
-<pre><code>myWeakmap.set(myElement, {timesClicked: 0});
-
-myElement.addEventListener(&apos;click&apos;, function() {
-  let logoData = myWeakmap.get(myElement);
-  logoData.timesClicked++;
-}, false);</code></pre><h3 id="5-总结"><a href="#5-总结" class="headerlink" title="5. 总结"></a>5. 总结</h3><p>Set<br>成员唯一、无序且不重复<br>[value, value]，键值与键名是一致的（或者说只有键值，没有键名）<br>可以遍历，方法有：add、delete、has<br>WeakSet<br>成员都是对象<br>成员都是弱引用，可以被垃圾回收机制回收，可以用来保存DOM节点，不容易造成内存泄漏<br>不能遍历，方法有add、delete、has<br>Map<br>本质上是键值对的集合，类似集合<br>可以遍历，方法很多可以跟各种数据格式转换<br>WeakMap<br>只接受对象作为键名（null除外），不接受其他类型的值作为键名<br>键名是弱引用，键值可以是任意的，键名所指向的对象可以被垃圾回收，此时键名是无效的<br>不能遍历，方法有get、set、has、delete</p>
-<h3 id="6-扩展：Object与Set、Map"><a href="#6-扩展：Object与Set、Map" class="headerlink" title="6. 扩展：Object与Set、Map"></a>6. 扩展：Object与Set、Map</h3><p>Object 与 Set</p>
-<pre><code>// Object
-const properties1 = {
-    &apos;width&apos;: 1,
-    &apos;height&apos;: 1
-}
-console.log(properties1[&apos;width&apos;]? true: false) // true
-
-// Set
-const properties2 = new Set()
-properties2.add(&apos;width&apos;)
-properties2.add(&apos;height&apos;)
-console.log(properties2.has(&apos;width&apos;)) // true
-Object 与 Map</code></pre><p>JS 中的对象（Object），本质上是键值对的集合（hash 结构）</p>
-<pre><code>const data = {};
-const element = document.getElementsByClassName(&apos;App&apos;);
-
-data[element] = &apos;metadata&apos;;
-console.log(data[&apos;[object HTMLCollection]&apos;]) // &quot;metadata&quot;</code></pre><p>但当以一个DOM节点作为对象 data 的键，对象会被自动转化为字符串[Object HTMLCollection]，所以说，Object 结构提供了 字符串-值 对应，Map则提供了 值-值 的对应</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://jackyumg.github.io/2020/04/07/%E9%9B%86%E5%90%88%E4%B8%8E%E5%AD%97%E5%85%B8/" data-id="ckcv8s02v000bf8vm2n8883dy" class="article-share-link">分享</a>
+      <a data-url="https://jackyumg.github.io/2020/04/15/css%E5%8A%A8%E7%94%BB/" data-id="ckg3cfnte000dbovm1egnh36n" class="article-share-link">分享</a>
       
       
     </footer>
@@ -642,7 +396,7 @@ console.log(data[&apos;[object HTMLCollection]&apos;]) // &quot;metadata&quot;</
 
   <nav id="page-nav">
     
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
   </nav>
 
 </section>
@@ -661,7 +415,7 @@ console.log(data[&apos;[object HTMLCollection]&apos;]) // &quot;metadata&quot;</
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a></li></ul>
     </div>
   </div>
 
@@ -672,6 +426,10 @@ console.log(data[&apos;[object HTMLCollection]&apos;]) // &quot;metadata&quot;</
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2020/08/13/%E6%AF%8F%E5%A4%A9%E5%9D%9A%E6%8C%81%E4%B8%80%E4%B8%AAcss-%E7%94%A8%E5%88%B8%E5%8D%A1%E7%89%87/">每天坚持一个css-用券卡片</a>
+          </li>
         
           <li>
             <a href="/2020/07/20/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F%E4%B8%8E%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F/">观察者模式与订阅模式</a>
@@ -687,10 +445,6 @@ console.log(data[&apos;[object HTMLCollection]&apos;]) // &quot;metadata&quot;</
         
           <li>
             <a href="/2020/04/15/css%E5%8A%A8%E7%94%BB/">css动画</a>
-          </li>
-        
-          <li>
-            <a href="/2020/04/07/%E9%9B%86%E5%90%88%E4%B8%8E%E5%AD%97%E5%85%B8/">集合与字典</a>
           </li>
         
       </ul>
